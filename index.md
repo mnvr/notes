@@ -3,9 +3,9 @@
 layout: home
 
 hero:
-    name: "Notes"
-    text: "by Manav"
-    tagline: Take me, Entropy
+    name: Notes
+    text: by Manav
+    tagline: Waves, flow
     actions:
         - theme: brand
           text: Random
@@ -13,6 +13,4 @@ hero:
         - theme: alt
           text: All
           link: /README
-
-sidebar: true
 ---
