@@ -1,3 +1,4 @@
+```
 DCL DOMContentLoaded
 L   Onload
 
@@ -7,4 +8,7 @@ LCP Largest Contentful Paint     h3
 
 The gap (script vs noscript)
 DCL <-- app.js --> L
+```
+
+https://github.com/mnvr/esbuild-playground
 
