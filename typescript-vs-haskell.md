@@ -1,11 +1,6 @@
 ---
 title: TypeScript vs Haskell
-subtitle: Structural vs Nominal Type Systems
-date: 2023-11-30
-description: Structural & nominal type systems
-theme: paper
-layout: text
-unlisted: true
+description: Structural vs Nominal Type Systems
 ---
 
 TypeScript provides <mark>structural typing</mark>. If it walks like a duck, and

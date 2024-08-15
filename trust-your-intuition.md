@@ -1,22 +1,21 @@
 ---
 title: Trust your intuition
-date: 2023-11-29
 description: The bias fallacy
-theme: paper
-layout: text
 ---
 
 import { AttributedQuote } from "layouts/text";
 
 People will tell you we have all sorts of biases. So what!
 
-<AttributedQuote attribution="Walt Whitman, Song of Myself">
+<pre>
 
-Do I contradict myself?<br/>
-Very well then I contradict myself, <br/>
-(I am large, I contain multitudes.)<br/>
+Do I contradict myself?
+Very well then I contradict myself,
+(I am large, I contain multitudes.)
 
-</AttributedQuote>
+    ---- Walt Whitman, Song of Myself
+
+</pre>
 
 Our intuition is our connection to our unconscious self. Our unconscious self
 deals with and processes much, much, more information than we'll ever be aware

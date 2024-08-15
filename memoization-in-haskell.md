@@ -1,11 +1,6 @@
 ---
 title: Memoization in Haskell
-subtitle: A State monad tutorial
-date: 2023-12-04
-description: Taking the State monad out for a spin
-theme: paper
-layout: text
-unlisted: true
+description: A State monad tutorial
 ---
 
 Haskell provides a State monad, but it seems a bit too magical at times. There
@@ -616,10 +611,10 @@ is the same as this code:
 liftM2 (+) (fib (n - 1)) (fib (n - 2)) >>= \r ->
 ```
 
-That is, we're "lifting" the normal plus operator (+) from acting on `Int` values,
-to get them to act on `State Cache Int` values. How Haskell does that is not
-essential to know for our purposes here, just that Haskell can automatically do
-it for us.
+That is, we're "lifting" the normal plus operator (+) from acting on `Int`
+values, to get them to act on `State Cache Int` values. How Haskell does that is
+not essential to know for our purposes here, just that Haskell can automatically
+do it for us.
 
 So using `liftM2`, our code becomes:
 
@@ -664,9 +659,9 @@ the `State Cache Int`. The requirement is that the state should be such that we
 can `lookup n` and `(n, r) :` on it, but otherwise we can generalize the type
 signature.
 
-We can replace the `liftM2` by the more standard, so called, applicative
-style `(+) <$> fib (n - 1) <*> fib (n - 2)`. We can also move the memo upwards
-so that it also covers the base cases:
+We can replace the `liftM2` by the more standard, so called, applicative style
+`(+) <$> fib (n - 1) <*> fib (n - 2)`. We can also move the memo upwards so that
+it also covers the base cases:
 
 ```haskell
 fib :: Int -> State Cache Int
