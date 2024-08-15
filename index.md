@@ -9,7 +9,7 @@ hero:
     actions:
         - theme: brand
           text: Random
-          link: /README
+          link: /random
         - theme: alt
           text: All
           link: /README
