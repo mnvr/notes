@@ -24,6 +24,7 @@ export default defineConfig({
             { icon: "github", link: "https://github.com/mnvr/notes" },
             { icon: "mastodon", link: "https://mastodon.social/@mnvr" },
         ],
+        externalLinkIcon: true,
         editLink: {
             pattern: "https://github.com/mnvr/notes/edit/main/:path",
         },
