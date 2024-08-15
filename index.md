@@ -3,23 +3,16 @@
 layout: home
 
 hero:
-  name: "Notes"
-  text: "Notes by Manav"
-  tagline: My great project tagline
-  actions:
-    - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
+    name: "Notes"
+    text: "by Manav"
+    tagline: Take me, Entropy
+    actions:
+        - theme: brand
+          text: Random
+          link: /README
+        - theme: alt
+          text: All
+          link: /README
 
-features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+sidebar: true
 ---
-
