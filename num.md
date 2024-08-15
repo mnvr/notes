@@ -1,15 +1,14 @@
 ---
 title: 1 vs 1.0
-date: 2024-01-04
 description: Integers are not real
-unlisted: true
-theme: paper
-layout: text
 ---
 
-tl;dr; <mark>Real numbers and integers are entirely different things. They’re
-often incorrectly equated because both are plotted on the same number
-line.</mark>
+# 1 vs 1.0
+
+_Integers are not real_
+
+Real numbers and integers are entirely different things. They’re often
+incorrectly equated because both are plotted on the same number line.
 
 I used to think that I understood the difference, but I didn’t. This false
 feeling of comprehension was because there are two different differences at
@@ -20,8 +19,8 @@ play:
 2. The difference between floating point numbers and reals.
 
 I understood the second one, but not the first, until recently. This
-understanding doesn’t have great practical benefit, but it did bring me great
-intellectual joy, so I thought I’ll share my realisation.
+understanding doesn’t have great practical benefit, and perhaps my understanding
+is even incorrect, maybe I'm misusing infinite sets. But here goes.
 
 ---
 
@@ -29,6 +28,8 @@ So I knew that there were natural numbers, and from them arose integers, and
 from that folks made rational numbers, and from those folks made real numbers,
 and some folks didn’t just stop there, because why not, and they made complex
 numbers.
+
+> All numbers are imaginary. Have you seen `-5` horses?
 
 The thing I didn’t understand was that the jump from rational numbers to real
 numbers was not just a jump in quantity, it was a jump in kind too.
@@ -62,13 +63,13 @@ This is a surprise the first time, but then one reads _What Every Programmer
 Must Know About Floating Point Numbers_ (or some Stack Overflow answer that
 summarises it to a sentence), and figures out that floating point values are
 inexact, operation-order dependent representations of the actual, underlying,
-real number. Some times, say with a number like 𝜋, there aren’t even enough
-bits in the universe to represent the underlying real number, but that’s fine,
-64 bits ought to be enough for anybody.
+real number. Some times, say with a number like 𝜋, there aren’t even enough bits
+in the universe to represent the underlying real number, but that’s fine, 64
+bits ought to be enough for anybody.
 
 This is the second difference I mentioned above - _the difference between
 floating point numbers and reals_. I understood this, and this was my go to
-gotcha (that I never got to use) for unsuspecting noobs, asking them why a for
+gotcha (that I never got to use) for unsuspecting newbies, asking them why a for
 loop summing up an array of floating point values returned different results if
 I reversed the array first.
 
@@ -117,11 +118,15 @@ see how they are different categories, but _I just want a number mate_.
 My moment of realization came when (don’t ask me why) I was doing this thought
 experiment:
 
-{/* prettier-ignore */}
-<mark>How long will it take for me to pick an integer if I keep picking random
-real numbers?</mark>
+How long will it take for me to pick an integer if I keep picking random real
+numbers?
 
 The answer is - never!
+
+> [!WARNING]
+>
+> I'm not sure this is the correct answer. Infinite sets have a tendency to
+> drive people mad if they stare into them for too long.
 
 The realisation itself dawned in two phases. First was the immediate and
 ultimately flawed one: there are so infinitely many real numbers that if we
@@ -157,14 +162,6 @@ cannot ever reconstruct the integer, when I’m in the land of the reals.
 
 ---
 
-Apologies if all this sounds rather long winded. I tried to mention afront that
-this was just my personal journey of understanding. I’m sure I still have some,
-maybe all, of the technicalities wrong. Based on feedback (e.g. [see this
-comment](https://github.com/mnvr/mrmr.io/issues/2)), it seems that my
-conclusions are actually incorrect. And even if my conclusions were to be
-correct I’m certain that there are better expositions out there of what I’m
-trying to say here.
-
 So what happened after I figured this?
 
 Well, first of all I thanked the universe that there were people who knew more
@@ -186,8 +183,8 @@ But I’m sure over time Haskell will evolve simpler ways of representing the Nu
 hierarchy than what it currently has. In fact, if I use Haskell continuously for
 a while I find that these conversions aren't a problem.
 
-I once actually wondered why (that these errors don't turn out to be as big a
-problem as they seem on first contact). I think it has to do with two factors:
+I once actually wondered why it is that these errors don't turn out to be as big
+a problem as they seem on first contact. I think it has to do with two factors:
 
 1. In a real program, I usually provide types for the top level expressions.
    This tends to sort things out.
@@ -261,14 +258,12 @@ same thing as the actual, real valued, complex numbers, but they’re quite
 useful. They also have a name: like everything else in maths, they’re named
 after Gauss, and are called _Gaussian Integers_.
 
-So it was with glee I saw in my local Haddock that GHC indeed ships with a `Num
-a => Complex a` type in the standard installation. It took a frustrating hour
-for this glee to turn into a sigh as I figured that `Complex Int` is useless
-when we actually try to do any operations on it (because the `Num` instance of
-`Complex Int` has a `RealFloat` constraint).
+So it was with glee I saw in my local Haddock that GHC indeed ships with a
+`Num a => Complex a` type in the standard installation. It took a frustrating
+hour for this glee to turn into a sigh as I figured that `Complex Int` is
+useless when we actually try to do any operations on it (because the `Num`
+instance of `Complex Int` has a `RealFloat` constraint).
 
 Hence, after all these words, if there is something practical I get to wish for,
 it is that someone who understands more maths than I do fixes up the instances
 so that `Complex Int` is not just a gluesticked mantelpiece.
-
-If you’re still reading, thanks! and I hope you enjoyed it.
