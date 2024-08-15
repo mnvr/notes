@@ -5,10 +5,11 @@ import { generateSidebar } from "vitepress-sidebar";
 export default defineConfig({
     title: "Notes",
     description: "Notes by Manav",
+    head: [["link", { rel: "icon", href: "/icon.png", type: "image/png" }]],
     lastUpdated: true,
     // https://vitepress.dev/reference/default-theme-config
     themeConfig: {
-        logo: "assets/icon.png",
+        logo: "/icon.png",
         // https://vitepress-sidebar.jooy2.com/
         sidebar: generateSidebar({
             hyphenToSpace: true,
