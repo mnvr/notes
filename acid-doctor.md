@@ -1,4 +1,5 @@
 ---
+title: Acid, doctor
 description: Critical periods, psychedelics and imprinting
 ---
 
