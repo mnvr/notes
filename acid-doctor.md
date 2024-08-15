@@ -4,7 +4,8 @@ description: Critical periods, psychedelics and imprinting
 
 # Acid, doctor
 
----
+> Brains have critical periods, and trace amounts of chemicals can retrigger
+> them.
 
 Animals (people) have critical periods. e.g. a baby chick will imprint whatever
 is moving around in its environment after hatching as their mother.
