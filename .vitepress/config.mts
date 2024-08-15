@@ -8,6 +8,7 @@ export default defineConfig({
     lastUpdated: true,
     // https://vitepress.dev/reference/default-theme-config
     themeConfig: {
+        logo: "assets/icon.png",
         // https://vitepress-sidebar.jooy2.com/
         sidebar: generateSidebar({
             hyphenToSpace: true,
