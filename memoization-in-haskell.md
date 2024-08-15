@@ -3,6 +3,10 @@ title: Memoization in Haskell
 description: A State monad tutorial
 ---
 
+# Memoization in Haskell
+
+_A State monad tutorial_
+
 Haskell provides a State monad, but it seems a bit too magical at times. There
 are many good introductions out there that try to derive the State monad from
 first principles, but they tend to focus on the "monad" part of it. Here I
