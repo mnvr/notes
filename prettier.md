@@ -1,4 +1,5 @@
 ---
+title: Prettier
 description: Why is Prettier rock solid?
 ---
 
