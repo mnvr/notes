@@ -16,6 +16,9 @@ export default defineConfig({
             // fallback to the filename.
             useTitleFromFrontmatter: true,
         }),
+        search: {
+            provider: "local",
+        },
         socialLinks: [
             { icon: "github", link: "https://github.com/mnvr/notes" },
             { icon: "mastodon", link: "https://mastodon.social/@mnvr" },
