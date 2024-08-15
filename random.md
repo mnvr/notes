@@ -3,8 +3,7 @@ import { useData } from "vitepress";
 
 const { theme } = useData();
 
-// const randomElement = (xs: string[]) =>
-//     xs[Math.floor(Math.random() * xs.length)]!;
+const randomElement = (xs) => xs[Math.floor(Math.random() * xs.length)];
 
 // Note: theme.sidebar is a proxy object which is undefined at this point, but
 // can be used in the code below.
@@ -13,7 +12,7 @@ const { theme } = useData();
 <ClientOnly>
 <pre>
 
-{{(theme.sidebar.map(({link}) => link))}}
+{{randomElement(theme.sidebar.map(({link}) => link))}}
 
 </pre>
 </ClientOnly>
