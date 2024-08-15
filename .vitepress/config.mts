@@ -6,6 +6,7 @@ export default defineConfig({
     title: "Notes",
     description: "Notes by Manav",
     head: [["link", { rel: "icon", href: "/icon.png", type: "image/png" }]],
+    cleanUrls: true,
     lastUpdated: true,
     // https://vitepress.dev/reference/default-theme-config
     themeConfig: {
