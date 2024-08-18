@@ -13,11 +13,14 @@ export default defineConfig({
         logo: "/icon.png",
         // https://vitepress-sidebar.jooy2.com/
         sidebar: generateSidebar({
-            hyphenToSpace: true,
-            capitalizeFirst: true,
-            // Use the `title` in Frontmatter if present, otherwise
-            // fallback to the filename.
+            // Don't show these in the sidebar.
+            excludeFiles: ["README.md", "random.md"],
+            // Use the "title" from frontmatter as the sidebar entry.
             useTitleFromFrontmatter: true,
+            // Sort using the "date" field in frontmatter.
+            sortMenusByFrontmatterDate: true,
+            // Sort so that the latest entry is at the top.
+            sortMenusOrderByDescending: true,
         }),
         search: {
             provider: "local",
