@@ -1,6 +1,7 @@
 ---
 title: Acid, doctor
 description: Critical periods, psychedelics and imprinting
+date: 2024-07-28
 ---
 
 # Acid, doctor

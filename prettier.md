@@ -1,6 +1,7 @@
 ---
 title: Prettier
 description: Why is Prettier rock solid?
+date: 2024-01-18
 ---
 
 ### Why is Prettier rock solid?

@@ -3,6 +3,7 @@ title: Cherry pick a pull request
 description:
     How to create another pull request from an already merged one, but this time
     on a different branch
+date: 2024-02-08
 ---
 
 # Cherry pick a pull request
