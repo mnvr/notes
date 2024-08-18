@@ -3,6 +3,8 @@ title: Prettier
 description: Why is Prettier rock solid?
 ---
 
+### Why is Prettier rock solid?
+
 I've always wondered why Prettier is so good.
 
 The idea was mainstreamed by `gofmt`, but `gofmt` doesn't indent, which is the

@@ -5,6 +5,8 @@ description:
     on a different branch
 ---
 
+# Cherry pick a pull request
+
 I don't know if this is the best way to do this, but here goes. Suppose we have
 a pull request that has already been merged into `main`, and now we want to open
 another pull request with the same set of commits, but this time we want to open
