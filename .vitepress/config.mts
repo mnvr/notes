@@ -1,17 +1,17 @@
 import { defineConfig } from "vitepress";
 import { generateSidebar } from "vitepress-sidebar";
 
-// https://vitepress.dev/reference/site-config
+/* https://vitepress.dev/reference/site-config */
 export default defineConfig({
     title: "Notes",
     description: "Notes by Manav",
     head: [["link", { rel: "icon", href: "/icon.png", type: "image/png" }]],
     cleanUrls: true,
     lastUpdated: true,
-    // https://vitepress.dev/reference/default-theme-config
+    /* https://vitepress.dev/reference/default-theme-config */
     themeConfig: {
         logo: "/icon.png",
-        // https://vitepress-sidebar.jooy2.com/
+        /* https://vitepress-sidebar.jooy2.com/ */
         sidebar: generateSidebar({
             // Don't show these in the sidebar.
             excludeFiles: ["README.md", "random.md"],

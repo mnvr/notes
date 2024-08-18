@@ -5,7 +5,7 @@ layout: home
 hero:
     name: Notes
     text: by Manav
-    tagline: Waves, flow
+    tagline: Collections of words, in various stages of comprehensibility and coherence
     actions:
         - theme: brand
           text: Random
