@@ -1,6 +1,7 @@
 ---
 title: 1 vs 1.0
 description: Integers are not real
+date: 2024-01-04
 ---
 
 # 1 vs 1.0

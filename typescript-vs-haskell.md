@@ -1,6 +1,7 @@
 ---
 title: TypeScript vs Haskell
 description: Structural vs nominal type systems
+date: 2023-11-30
 ---
 
 # TypeScript vs Haskell

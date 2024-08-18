@@ -1,6 +1,7 @@
 ---
 title: Trust your intuition
 description: The bias fallacy
+date: 2023-11-29
 ---
 
 # Trust your intuition

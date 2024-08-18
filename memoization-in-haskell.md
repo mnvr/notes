@@ -1,6 +1,7 @@
 ---
 title: Memoization in Haskell
 description: A State monad tutorial
+date: 2023-12-04
 ---
 
 # Memoization in Haskell
