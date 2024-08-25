@@ -1,20 +1,35 @@
 ---
 title: Evoke
 date: 2023-11-20
-description: You decide
-colors:
-    - "#ff0000"
-    - "#3df9e4"
-    - white
-preview-image-highlight: "#ff0000"
-preview-image-shadow: "#3df9e4"
 ---
 
-import * as C from "./components";
+<style>
+    .m-content {
+        background-color: #ff0000;
+        color: #222;
+        border-radius: 3px;
+        padding: 16px;
+        font-size: 1.5rem;
 
-<C.Title />
+        h1 {
+            font-weight: 600;
+            color: #222;
+        }
 
-<C.Text>
+        p {
+            font-weight: 600;
+        }
+
+        p:nth-child(even) {
+            font-weight: 500;
+            color: white;
+        }
+    }
+</style>
+
+<div className="m-content">
+
+# Evoke
 
 Here is a style of rhetoric I’ve been thinking about. No convincing, no agenda,
 and no specific audience in mind.
@@ -36,8 +51,4 @@ see further than (at best) the author's mind.
 Instead of conveying meaning the aim is to trigger analogous processes in the
 reader’s mind.
 
-</C.Text>
-
-<C.Signoff />
-
-<C.Footer />
+</div>
