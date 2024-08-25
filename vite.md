@@ -16,4 +16,4 @@ npx vite dev
 ```
 
 in any folder, and get a hot reloading http server that serves the HTML in that
-directory
+directory.
