@@ -1,5 +1,6 @@
 import { defineConfig } from "vitepress";
 import { generateSidebar } from "vitepress-sidebar";
+import { generateFeed } from "./feed";
 
 /* https://vitepress.dev/reference/site-config */
 export default defineConfig({
@@ -34,4 +35,5 @@ export default defineConfig({
             pattern: "https://github.com/mnvr/notes/edit/main/:path",
         },
     },
+    buildEnd: generateFeed,
 });
