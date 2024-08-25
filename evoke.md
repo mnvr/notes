@@ -3,8 +3,8 @@ title: Evoke
 date: 2023-11-20
 ---
 
-<style>
-    .m-content {
+<style module>
+    .content {
         background-color: #ff0000;
         color: #222;
         border-radius: 3px;
@@ -27,7 +27,7 @@ date: 2023-11-20
     }
 </style>
 
-<div className="m-content">
+<div :class="$style.content">
 
 # Evoke
 
