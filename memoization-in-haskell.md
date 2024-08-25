@@ -205,7 +205,7 @@ arguments the original function that we're memoizing takes.
 
 You might say that what if we want to memoize a function that returns something
 other than a `Int`, or whose memo table has a different type like a `Map`? Easy
-peasy, we can actually just parameterize these two types:
+peasy, we can just parameterize these two types:
 
 -   Let us call the type of the state as `s`.
 
@@ -230,8 +230,8 @@ module.
 
 > Note that the word "state" here refers to two different things. In general,
 > state refers to anything that we want to automatically thread along our normal
-> functions. The type `State` (capitalized one) is actually a shorthand for the
-> "State monad".
+> functions. The type `State` (capitalized one) is a shorthand for the "State
+> monad".
 >
 > That is, the type `s -> (a, s)` is the "State monad" (and the Haskell type
 > that refers to a "State monad" is called `State`). This type itself has two
@@ -431,9 +431,9 @@ To get the compiler to be happy, the code needs to be changed to:
    directly wrapped in a `pure`.
 
 2. Remove the `runStateT` and stop passing the state to fib, instead just return
-   the fib values themselves (Reminder that `fib x` is actuall a value of type
-   `State Cache Int`, which is a state monad, which is what we should be passing
-   into and returning from `>>=`).
+   the fib values themselves (Reminder that `fib x` is a value of type `State
+   Cache Int`, which is a state monad, which is what we should be passing into
+   and returning from `>>=`).
 
 > I'm not sure how helpful this is being – for people who don't have the
 > necessary background these might be arbitrary changes. I'll think of better
@@ -483,11 +483,11 @@ fib n = get >>= \s ->
 ```
 
 In the final result, we're not actually using the value chained from the put,
-which is why we ignore it using the underscore wildcard. This is actually a
-common thing - sometimes we just want two things to happen one after the other,
-but the second thing doesn't use the result of the first. It is so common, that
-the Haskell standard library provides a sequence operator `>>` to shorten this
-`>>= \_ ->` pattern.
+which is why we ignore it using the underscore wildcard. This is a common thing
+\- sometimes we just want two things to happen one after the other, but the
+second thing doesn't use the result of the first. It is so common, that the
+Haskell standard library provides a sequence operator `>>` to shorten this `>>=
+\_ ->` pattern.
 
 So after changing the last two lines to
 

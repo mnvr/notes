@@ -184,8 +184,9 @@ But I’m sure over time Haskell will evolve simpler ways of representing the Nu
 hierarchy than what it currently has. In fact, if I use Haskell continuously for
 a while I find that these conversions aren't a problem.
 
-I once actually wondered why it is that these errors don't turn out to be as big
-a problem as they seem on first contact. I think it has to do with two factors:
+As an aside, I once wondered why it is that these errors don't turn out to be as
+big a problem as they seem on first contact. I think it has to do with two
+factors:
 
 1. In a real program, I usually provide types for the top level expressions.
    This tends to sort things out.
