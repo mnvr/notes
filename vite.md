@@ -12,7 +12,7 @@ vite can be used as a quick (and better!) replacement for
 `python -m http.server 5173`.
 
 ```sh
-npx vite dev
+npx vite
 ```
 
 in any folder, and get a hot reloading http server that serves the HTML in that
