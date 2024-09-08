@@ -5,13 +5,11 @@ date: 2024-08-29
 
 # Shader Test
 
--   This is a test
--   And another one
-
 <style module>
 canvas {
     border: 1px solid green;
     width: 100%;
+    margin-block: 30px;
 }
 </style>
 
@@ -29,9 +27,36 @@ onMounted(() => {
     gl.clearColor(0, 0, 0, 1);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
+    const vs = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(vs, `
+    void main() {
+        gl_Position = vec4(0., 0., 0., 1.);
+        gl_PointSize = 100.;
+    }`);
+    gl.compileShader(vs);
 
-})
+    const fs = gl.createShader(gl.FRAGMENT_SHADER);
+    gl.shaderSource(fs, `
+    void main() {
+        gl_FragColor = vec4(1., 1., 1., 1.);
+    }`);
+    gl.compileShader(fs);
+
+    const gp = gl.createProgram();
+    gl.attachShader(gp, vs);
+    gl.attachShader(gp, fs);
+    gl.linkProgram(gp);
+    gl.detachShader(gp, vs);
+    gl.detachShader(gp, fs);
+    gl.deleteShader(vs);
+    gl.deleteShader(fs);
+
+    const log = gl.getProgramInfoLog(gp);
+    if (log) console.log(log);
+
+    gl.useProgram(gp);
+    gl.drawArrays(gl.POINTS, 0, 1);
+});
 </script>
 
-<canvas id="c">
-</canvas>
+<canvas id="c"></canvas>
