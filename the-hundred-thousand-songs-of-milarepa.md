@@ -93,7 +93,17 @@ const renderFragment = (canvas, fragment) => {
 }
 
 const fs = `
-gl_FragColor = vec4(gl_FragCoord.xy / size, sin(t), 1.);
+    vec2 uv = (2. * gl_FragCoord.xy - size) / min(size.x, size.y);
+    // A circle of some radius
+    float sdf = length(uv) - 0.8;
+    float d = abs(sdf);
+    // Use the reciprocal to give a neon vibe.
+    float r = 0.02 + sin(t / 2.5) * 0.007;
+    float c = r / (d + 0.001);
+
+    c = smoothstep(0.01, 0.1 - sin(t / 2.7) * 0.01, c);
+
+    gl_FragColor = vec4(c, c, c, 1.0);
 `;
 
 onMounted(() => renderFragment(document.getElementById("c"), fs));
