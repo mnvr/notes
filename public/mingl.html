@@ -1,0 +1,62 @@
+<canvas id="c"
+    ><script>
+        const z = `
+
+    gl_FragColor = vec4(gl_FragCoord.xy / 300., cos(1.-t), 1.);
+`;
+
+        S = (g, t, c) => (
+            g.shaderSource((s = g.createShader(t)), c), g.compileShader(s), s
+        );
+        P = (g, f, v) => (
+            g.attachShader((r = g.createProgram()), v),
+            g.attachShader(r, f),
+            g.linkProgram(r),
+            r
+        );
+        const c = document.getElementById("c");
+
+        const gl = c.getContext("webgl");
+
+        console.log(gl.VERTEX_SHADER, gl.FRAGMENT_SHADER);
+        // 35633 35632
+        const vs = S(
+            gl,
+            gl.VERTEX_SHADER,
+            `
+    void main() {
+        gl_Position = vec4(0., 0., 0., 1.);
+        gl_PointSize = 1000.;
+    }`
+        );
+
+        const fs = S(
+            gl,
+            gl.FRAGMENT_SHADER,
+            `
+    precision highp float;
+    uniform float t;
+    void main() {
+        gl_FragColor = vec4(gl_FragCoord.xy / 300., cos(1.-t), 1.);
+    }`
+        );
+
+        const p = P(gl, vs, fs);
+
+        const buffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.enableVertexAttribArray(0);
+        gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+
+        gl.useProgram(p);
+
+        const it = gl.getUniformLocation(p, "t");
+
+        const draw = (now) => {
+            gl.uniform1f(it, now / 99);
+            gl.drawArrays(0, 0, 1);
+            requestAnimationFrame(draw);
+        };
+        requestAnimationFrame(draw);
+    </script>
+</canvas>
