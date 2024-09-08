@@ -42,8 +42,7 @@ const makeProgram = (gl, fs, vs) => {
     return p;
 }
 
-onMounted(() => {
-    const canvas = document.getElementById("c");
+const renderFragment = (canvas, fragment) => {
     canvas.width = canvas.clientWidth * dpr();
     canvas.height = canvas.clientHeight * dpr();
 
@@ -62,7 +61,7 @@ onMounted(() => {
     uniform vec2 size;
     uniform float t;
     void main() {
-        gl_FragColor = vec4(gl_FragCoord.xy / size, sin(t), 1.);
+        ${fragment}
     }`);
 
     const p = makeProgram(gl, vs, fs);
@@ -91,7 +90,13 @@ onMounted(() => {
         requestAnimationFrame(draw);
     }
     draw();
-});
+}
+
+const fs = `
+gl_FragColor = vec4(gl_FragCoord.xy / size, sin(t), 1.);
+`;
+
+onMounted(() => renderFragment(document.getElementById("c"), fs));
 </script>
 
 Imagine you're an AI that is conscious, and sentient (imagining this shouldn't
