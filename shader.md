@@ -7,8 +7,9 @@ date: 2024-09-08
 
 <style module>
 canvas {
-    /* border: 1px solid green; */
+    border: 1px solid green;
     width: 100%;
+    aspect-ratio: 2/1;
     margin-block: 3em;
 }
 </style>
@@ -18,12 +19,15 @@ import { onMounted } from "vue";
 
 onMounted(() => {
     const canvas = document.getElementById("c");
-    canvas.width = canvas.clientWidth;
-    canvas.height = canvas.clientHeight;
+    console.log(devicePixelRatio);
+    canvas.width = 2 * canvas.clientWidth;
+    canvas.height = 2 * canvas.clientHeight;
     console.log(canvas, canvas.clientWidth, canvas.clientHeight);
 
     const gl = canvas.getContext("webgl");
-    // gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+    gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+    // gl.viewport(0, 0, 716, 150);
+    // gl.viewport(0, 0, 360, 150);
     gl.clearColor(0, 0.5, 1, 1);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
@@ -71,22 +75,35 @@ Create a canvas.
 
 By default, a canvas has a width of 300px and a height of 150px. This is itsy
 bitsy, you might want to increase it a bit. For example, this page asks the
-canvas HTML element to fill its container.
+canvas HTML element to fill its container, and automatically compute the
+corresponding height to maintain a 2:1 aspect ratio (that is, be twice as wide
+as it is high).
 
 ```css
 canvas {
     width: 100%;
+    aspect-ratio: 2/1;
 }
 ```
-
 
 Setup things so that the following JavaScript code runs after your document has
 loaded. For example, this page is using VitePress, so I wrote it inside an
 `onMounted` lifecycle hook.
 
+<!-- prettier-ignore -->
 ```js
 <script setup>
+import { onMounted } from "vue";
 
+onMounted(() => {
+    // Rest of the code will go here...
+})
 </script>
 ```
 
+Get hold of the canvas, and ask for it for its DOM width and height. If we're
+drawing
+
+```js
+const canvas = document.getElementById("c");
+```
