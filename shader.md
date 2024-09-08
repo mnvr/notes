@@ -32,7 +32,7 @@ onMounted(() => {
     gl.shaderSource(vs, `
     void main() {
         gl_Position = vec4(0., 0., 0., 1.);
-        gl_PointSize = 480.;
+        gl_PointSize = 100.;
     }`);
     gl.compileShader(vs);
 
@@ -43,19 +43,19 @@ onMounted(() => {
     }`);
     gl.compileShader(fs);
 
-    const gp = gl.createProgram();
-    gl.attachShader(gp, vs);
-    gl.attachShader(gp, fs);
-    gl.linkProgram(gp);
-    gl.detachShader(gp, vs);
-    gl.detachShader(gp, fs);
+    const p = gl.createProgram();
+    gl.attachShader(p, vs);
+    gl.attachShader(p, fs);
+    gl.linkProgram(p);
+    gl.detachShader(p, vs);
+    gl.detachShader(p, fs);
     gl.deleteShader(vs);
     gl.deleteShader(fs);
 
-    const log = gl.getProgramInfoLog(gp);
+    const log = gl.getProgramInfoLog(p);
     if (log) console.log(log);
 
-    gl.useProgram(gp);
+    gl.useProgram(p);
     gl.drawArrays(gl.POINTS, 0, 1);
 });
 </script>
@@ -133,3 +133,55 @@ const gl = canvas.getContext("webgl");
 gl.clearColor(0, 0.5, 1, 1);
 gl.clear(gl.COLOR_BUFFER_BIT);
 ```
+
+Now onto the shaders. We need two, a vertex shader, which defines the area we're
+going to draw in, and a fragment shader, which defines the color this area will
+have.
+
+For now, let's create shaders that draw a point, and color it white.
+
+<!-- prettier-ignore -->
+```js
+const vs = gl.createShader(gl.VERTEX_SHADER);
+gl.shaderSource(vs, `
+void main() {
+    gl_Position = vec4(0., 0., 0., 1.);
+    gl_PointSize = 100.;
+}`);
+gl.compileShader(vs);
+
+const fs = gl.createShader(gl.FRAGMENT_SHADER);
+gl.shaderSource(fs, `
+void main() {
+    gl_FragColor = vec4(1., 1., 1., 1.);
+}`);
+gl.compileShader(fs);
+```
+
+And tell the WebGL context of our canvas to use them.
+
+<!-- prettier-ignore -->
+```js
+const p = gl.createProgram();
+gl.attachShader(p, vs);
+gl.attachShader(p, fs);
+gl.linkProgram(p);
+gl.detachShader(p, vs);
+gl.detachShader(p, fs);
+gl.deleteShader(vs);
+gl.deleteShader(fs);
+```
+
+Even though this is a minimal example, the compilation still might've failed, so
+to save ourselves head scratching, do a `console.log` if there were any errors.
+
+```js
+const log = gl.getProgramInfoLog(p);
+if (log) console.log(log);
+```
+
+> [!TIP]
+>
+> A common oopsie is to omit the dots when specifying numbers in GLSL. GLSL is
+> not JavaScript, and those dots are mandatory – for GLSL `1` and `1.0` (or its
+> shorthand, `1.`) mean different things.
