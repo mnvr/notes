@@ -1,9 +1,10 @@
 ---
-title: Minimal WebGL Shaders
+title: Minimal WebGL shaders
+description: An example GLSL shader demonstrating the surrounding ceremony
 date: 2024-09-08
 ---
 
-# Minimal WebGL Shaders
+# Minimal WebGL shaders
 
 <style module>
 canvas {
@@ -176,7 +177,6 @@ gl.deleteShader(fs);
 Even though this is a minimal example, the compilation still might've failed
 because of a typo, so to save ourselves head scratching, give WebGL a chance to
 speak.
-
 
 ```js
 const log = gl.getProgramInfoLog(p);
