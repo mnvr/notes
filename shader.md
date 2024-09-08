@@ -21,15 +21,10 @@ const dpr = () => devicePixelRatio;
 
 onMounted(() => {
     const canvas = document.getElementById("c");
-    // console.log(devicePixelRatio);
-    // canvas.width = 2 * canvas.clientWidth;
-    // canvas.height = 2 * canvas.clientHeight;
-    // console.log(canvas, canvas.clientWidth, canvas.clientHeight);
+    canvas.width = canvas.clientWidth * devicePixelRatio;
+    canvas.height = canvas.clientHeight * devicePixelRatio;
 
     const gl = canvas.getContext("webgl");
-    // gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
-    // gl.viewport(0, 0, 716, 150);
-    // gl.viewport(0, 0, 360, 150);
     gl.clearColor(0, 0.5, 1, 1);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
@@ -37,7 +32,7 @@ onMounted(() => {
     gl.shaderSource(vs, `
     void main() {
         gl_Position = vec4(0., 0., 0., 1.);
-        gl_PointSize = 100.;
+        gl_PointSize = 480.;
     }`);
     gl.compileShader(vs);
 
@@ -125,4 +120,16 @@ drawing surface size to the number of device pixels per dimension.
 const canvas = document.getElementById("c");
 canvas.width = canvas.clientWidth * devicePixelRatio;
 canvas.height = canvas.clientHeight * devicePixelRatio;
+```
+
+So far, we've not done anything WebGL specific. You can use the above steps if
+you want to draw lines rectangles and other two dimensional delicacies on the
+canvas too.
+
+Now let's get hands our on the WebGL context, and paint it blue-ish.
+
+```js
+const gl = canvas.getContext("webgl");
+gl.clearColor(0, 0.5, 1, 1);
+gl.clear(gl.COLOR_BUFFER_BIT);
 ```
