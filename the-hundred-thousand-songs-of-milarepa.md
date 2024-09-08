@@ -64,17 +64,21 @@ onMounted(() => {
     }`);
 
     const p = makeProgram(gl, vs, fs);
-    gl.useProgram(p);
 
     const buffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
     gl.enableVertexAttribArray(0);
     gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
 
-    const verts = [-1, -1, 1, -1, 1, 1, -1, 1];
+    // These are clip space coordinates. (-1, -1) is bottom left, (1, 1) is the
+    // top right. We draw 2 triangles (top left half, then bottom right half) to
+    // cover the entire square.
+
+    const verts = [-1, -1, -1, 1, 1, 1, 1, 1, 1, -1, -1, -1];
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verts), gl.STATIC_DRAW);
 
-    gl.drawArrays(gl.TRIANGLES, 0, 4);
+    gl.useProgram(p);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
 
     gl.useProgram(null);
     gl.deleteProgram(p);
