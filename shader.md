@@ -1,15 +1,15 @@
 ---
-title: Softmax
-date: 2024-08-29
+title: Minimal WebGL Shaders
+date: 2024-09-08
 ---
 
-# Shader Test
+# Minimal WebGL Shaders
 
 <style module>
 canvas {
-    border: 1px solid green;
+    /* border: 1px solid green; */
     width: 100%;
-    margin-block: 30px;
+    margin-block: 3em;
 }
 </style>
 
@@ -24,7 +24,7 @@ onMounted(() => {
 
     const gl = canvas.getContext("webgl");
     // gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
-    gl.clearColor(0, 0, 0, 1);
+    gl.clearColor(0, 0.5, 1, 1);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     const vs = gl.createShader(gl.VERTEX_SHADER);
@@ -60,3 +60,33 @@ onMounted(() => {
 </script>
 
 <canvas id="c"></canvas>
+
+Look Ma, no libraries.
+
+Create a canvas.
+
+```html
+<canvas id="c"></canvas>
+```
+
+By default, a canvas has a width of 300px and a height of 150px. This is itsy
+bitsy, you might want to increase it a bit. For example, this page asks the
+canvas HTML element to fill its container.
+
+```css
+canvas {
+    width: 100%;
+}
+```
+
+
+Setup things so that the following JavaScript code runs after your document has
+loaded. For example, this page is using VitePress, so I wrote it inside an
+`onMounted` lifecycle hook.
+
+```js
+<script setup>
+
+</script>
+```
+
