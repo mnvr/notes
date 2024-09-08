@@ -7,7 +7,6 @@ date: 2024-09-08
 
 <style module>
 canvas {
-    border: 1px solid green;
     width: 100%;
     aspect-ratio: 2/1;
     margin-block: 3em;
@@ -53,10 +52,13 @@ onMounted(() => {
     gl.deleteShader(fs);
 
     const log = gl.getProgramInfoLog(p);
-    if (log) console.log(log);
+    if (log) console.error(log);
 
     gl.useProgram(p);
     gl.drawArrays(gl.POINTS, 0, 1);
+
+    gl.useProgram(null);
+    gl.deleteProgram(p);
 });
 </script>
 
@@ -70,11 +72,12 @@ Create a canvas.
 <canvas id="c"></canvas>
 ```
 
-By default, a canvas has a width of 300px and a height of 150px. This is itsy
-bitsy, you might want to increase it a bit. For example, this page asks the
-canvas HTML element to fill its container, and automatically compute the
-corresponding height to maintain a 2:1 aspect ratio (that is, be twice as wide
-as it is high).
+By default, a canvas has a width of 300px and a height of 150px. That is itsy
+bitsy, you might want to increase it a bit.
+
+For example, this page asks the canvas HTML element to fill its container, and
+also automatically compute the corresponding height so as to maintain a 2:1
+aspect ratio (that is, be twice as wide as it is high).
 
 ```css
 canvas {
@@ -122,9 +125,7 @@ canvas.width = canvas.clientWidth * devicePixelRatio;
 canvas.height = canvas.clientHeight * devicePixelRatio;
 ```
 
-So far, we've not done anything WebGL specific. You can use the above steps if
-you want to draw lines rectangles and other two dimensional delicacies on the
-canvas too.
+So far, we've not done anything WebGL specific.
 
 Now let's get hands our on the WebGL context, and paint it blue-ish.
 
@@ -135,8 +136,8 @@ gl.clear(gl.COLOR_BUFFER_BIT);
 ```
 
 Now onto the shaders. We need two, a vertex shader, which defines the area we're
-going to draw in, and a fragment shader, which defines the color this area will
-have.
+going to draw in, and a fragment shader, which defines the color each pixel in
+this area will have.
 
 For now, let's create shaders that draw a point, and color it white.
 
@@ -172,12 +173,14 @@ gl.deleteShader(vs);
 gl.deleteShader(fs);
 ```
 
-Even though this is a minimal example, the compilation still might've failed, so
-to save ourselves head scratching, do a `console.log` if there were any errors.
+Even though this is a minimal example, the compilation still might've failed
+because of a typo, so to save ourselves head scratching, give WebGL a chance to
+speak.
+
 
 ```js
 const log = gl.getProgramInfoLog(p);
-if (log) console.log(log);
+if (log) console.error(log);
 ```
 
 > [!TIP]
@@ -185,3 +188,20 @@ if (log) console.log(log);
 > A common oopsie is to omit the dots when specifying numbers in GLSL. GLSL is
 > not JavaScript, and those dots are mandatory – for GLSL `1` and `1.0` (or its
 > shorthand, `1.`) mean different things.
+
+Everything's in place, let us ask GLSL to draw.
+
+```js
+gl.useProgram(p);
+gl.drawArrays(gl.POINTS, 0, 1);
+```
+
+Since we are not animating, we won't need our program subsequently, so we can
+also clean it up.
+
+```js
+gl.useProgram(null);
+gl.deleteProgram(p);
+```
+
+That's it. That's our lovely white dot on a blue ocean of nothingness.
