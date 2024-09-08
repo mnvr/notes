@@ -11,8 +11,8 @@ _Beautiful & binding, but are they any good?_
 <style module>
 .prose p {
     border-radius: 2px;
-    color: oklch(97% 0.09 105);
-    background-color: oklch(54% 0.22 29);
+    border: 1px solid oklch(54% 0.22 29);
+    background-color: oklch(97% 0.09 105 / 3%);
     padding: 1rem;
 }
 
