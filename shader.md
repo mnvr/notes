@@ -17,15 +17,17 @@ canvas {
 <script setup>
 import { onMounted } from "vue";
 
+const dpr = () => devicePixelRatio;
+
 onMounted(() => {
     const canvas = document.getElementById("c");
-    console.log(devicePixelRatio);
-    canvas.width = 2 * canvas.clientWidth;
-    canvas.height = 2 * canvas.clientHeight;
-    console.log(canvas, canvas.clientWidth, canvas.clientHeight);
+    // console.log(devicePixelRatio);
+    // canvas.width = 2 * canvas.clientWidth;
+    // canvas.height = 2 * canvas.clientHeight;
+    // console.log(canvas, canvas.clientWidth, canvas.clientHeight);
 
     const gl = canvas.getContext("webgl");
-    gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+    // gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
     // gl.viewport(0, 0, 716, 150);
     // gl.viewport(0, 0, 360, 150);
     gl.clearColor(0, 0.5, 1, 1);
@@ -101,9 +103,26 @@ onMounted(() => {
 </script>
 ```
 
-Get hold of the canvas, and ask for it for its DOM width and height. If we're
-drawing
+Get hold of the canvas, and ask for it for its DOM width and height. The canvas
+is still living in delusion that its width and height are at their default value
+(300, 150), so we also need to tell the canvas, hey buddy, wake up, this is the
+space you're occupying on the page (DOM).
+
+But that's not all. If you're viewing the page on a high density display, your
+screen will be showing multiple pixels for each CSS pixel. For example, I'm
+currently on a device that has a `devicePixelRatio` of 2.
+
+> [!TIP]
+>
+> Your current device has a devicePixelRatio of **<ClientOnly><span>{{ dpr()
+> }}</span></ClientOnly>**.
+
+If we were to just set the the canvas's dimensions to its corresponding CSS
+dimensions, our sketch will look blurry. We instead need to set the canvas'
+drawing surface size to the number of device pixels per dimension.
 
 ```js
 const canvas = document.getElementById("c");
+canvas.width = canvas.clientWidth * devicePixelRatio;
+canvas.height = canvas.clientHeight * devicePixelRatio;
 ```
