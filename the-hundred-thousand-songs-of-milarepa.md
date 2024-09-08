@@ -59,8 +59,9 @@ onMounted(() => {
 
     const fs = makeShader(gl, gl.FRAGMENT_SHADER, `
     precision highp float;
+    uniform vec2 size;
     void main() {
-        gl_FragColor = vec4(1., 1., 1., 1.);
+        gl_FragColor = vec4(gl_FragCoord.xy / size, 1., 1.);
     }`);
 
     const p = makeProgram(gl, vs, fs);
@@ -78,6 +79,7 @@ onMounted(() => {
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verts), gl.STATIC_DRAW);
 
     gl.useProgram(p);
+    gl.uniform2f(gl.getUniformLocation(p, "size"), canvas.width, canvas.height);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
 
     gl.useProgram(null);
