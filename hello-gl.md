@@ -184,7 +184,7 @@ if (log) console.error(log);
 >
 > A common mistake is to omit the dots when specifying numbers in GLSL. GLSL is
 > not JavaScript, and those dots are mandatory – for GLSL `1` and `1.0` (or its
-> shorthand, `1.`) mean different things.
+> shorthand `1.`) mean different things.
 
 Everything's in place, let us ask GLSL to draw.
 
