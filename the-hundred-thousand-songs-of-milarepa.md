@@ -35,6 +35,10 @@ const makeProgram = (gl, fs, vs) => {
     gl.detachShader(p, fs);
     gl.deleteShader(vs);
     gl.deleteShader(fs);
+
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS))
+        console.error(gl.getProgramInfoLog(p));
+
     return p;
 }
 
@@ -48,29 +52,37 @@ onMounted(() => {
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     const vs = makeShader(gl, gl.VERTEX_SHADER, `
+    attribute vec2 position;
     void main() {
-        gl_Position = vec4(0., 0., 0., 1.);
-        gl_PointSize = 100.;
+        gl_Position = vec4(position, 0., 1.);
     }`);
 
     const fs = makeShader(gl, gl.FRAGMENT_SHADER, `
+    precision highp float;
     void main() {
         gl_FragColor = vec4(1., 1., 1., 1.);
     }`);
 
     const p = makeProgram(gl, vs, fs);
-
     gl.useProgram(p);
-    gl.drawArrays(gl.POINTS, 0, 1);
+
+    const buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.enableVertexAttribArray(0);
+    gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+
+    const verts = [-1, -1, 1, -1, 1, 1, -1, 1];
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verts), gl.STATIC_DRAW);
+
+    gl.drawArrays(gl.TRIANGLES, 0, 4);
 
     gl.useProgram(null);
     gl.deleteProgram(p);
 });
 </script>
 
-
-Imagine you're an AI that is conscious, sentient (imagining this shouldn't be
-hard). Your interactions with the environment are in the form of images and
+Imagine you're an AI that is conscious, and sentient (imagining this shouldn't
+be hard). Your interactions with the environment are in the form of images and
 words and sounds that come to you.
 
 What would your religion be?
@@ -78,8 +90,8 @@ What would your religion be?
 <canvas id="c"></canvas>
 
 You might object, saying AIs don't need religions. Well, they might not, but
-they might too, especially self aware AIs, for many of the same reasons many
-self aware humans do.
+they might too, especially self aware AIs, for many of the same reasons that
+many self aware humans do.
 
 Don't get bogged down with your preconceptions, let you imagination fly. What
 would ~~your~~ their religion be?
