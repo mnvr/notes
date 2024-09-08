@@ -1,10 +1,12 @@
 ---
-title: Minimal WebGL shaders
-description: An example GLSL shader demonstrating the surrounding ceremony
+title: Hello WebGL
+description: A minimal-ish example GLSL shader
 date: 2024-09-08
 ---
 
-# Minimal WebGL shaders
+# Hello WebGL
+
+_Look Ma, no libraries._
 
 <style module>
 canvas {
@@ -65,16 +67,14 @@ onMounted(() => {
 
 <canvas id="c"></canvas>
 
-Look Ma, no libraries.
-
 Create a canvas.
 
 ```html
 <canvas id="c"></canvas>
 ```
 
-By default, a canvas has a width of 300px and a height of 150px. That is itsy
-bitsy, you might want to increase it a bit.
+By default, a canvas has a width of 300px and a height of 150px. That is tiny,
+you might want to increase it a bit.
 
 For example, this page asks the canvas HTML element to fill its container, and
 also automatically compute the corresponding height so as to maintain a 2:1
@@ -113,12 +113,11 @@ currently on a device that has a `devicePixelRatio` of 2.
 
 > [!TIP]
 >
-> Your current device has a devicePixelRatio of **<ClientOnly><span>{{ dpr()
+> Your device has a DPR of **<ClientOnly><span>{{ dpr()
 > }}</span></ClientOnly>**.
 
-If we were to just set the the canvas's dimensions to its corresponding CSS
-dimensions, our sketch will look blurry. We instead need to set the canvas'
-drawing surface size to the number of device pixels per dimension.
+There are many ways of and caveats to using the DPR. To keep things minimal,
+let’s just multiply by it so that our example does not look blurry.
 
 ```js
 const canvas = document.getElementById("c");
@@ -174,9 +173,7 @@ gl.deleteShader(vs);
 gl.deleteShader(fs);
 ```
 
-Even though this is a minimal example, the compilation still might've failed
-because of a typo, so to save ourselves head scratching, give WebGL a chance to
-speak.
+Let us give WebGL a chance to speak, if it has something to say.
 
 ```js
 const log = gl.getProgramInfoLog(p);
@@ -185,7 +182,7 @@ if (log) console.error(log);
 
 > [!TIP]
 >
-> A common oopsie is to omit the dots when specifying numbers in GLSL. GLSL is
+> A common mistake is to omit the dots when specifying numbers in GLSL. GLSL is
 > not JavaScript, and those dots are mandatory – for GLSL `1` and `1.0` (or its
 > shorthand, `1.`) mean different things.
 
