@@ -60,8 +60,9 @@ onMounted(() => {
     const fs = makeShader(gl, gl.FRAGMENT_SHADER, `
     precision highp float;
     uniform vec2 size;
+    uniform float t;
     void main() {
-        gl_FragColor = vec4(gl_FragCoord.xy / size, 1., 1.);
+        gl_FragColor = vec4(gl_FragCoord.xy / size, sin(t * 7.), 1.);
     }`);
 
     const p = makeProgram(gl, vs, fs);
@@ -71,19 +72,36 @@ onMounted(() => {
     gl.enableVertexAttribArray(0);
     gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
 
+    gl.useProgram(p);
+
     // These are clip space coordinates. (-1, -1) is bottom left, (1, 1) is the
     // top right. We draw 2 triangles (top left half, then bottom right half) to
     // cover the entire square.
 
-    const verts = [-1, -1, -1, 1, 1, 1, 1, 1, 1, -1, -1, -1];
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verts), gl.STATIC_DRAW);
+        // console.log(loc);
+        let then = 0;
+    const draw = (now) => {
+            gl.clearColor(0, 0, 0, 1);
+            gl.clearDepth(1);
+             gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.clear(gl.COLOR_BUFFER_BIT);
 
-    gl.useProgram(p);
-    gl.uniform2f(gl.getUniformLocation(p, "size"), canvas.width, canvas.height);
+        const verts = [-1, -1, -1, 1, 1, 1, 1, 1, 1, -1, -1, -1];
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verts), gl.STATIC_DRAW);
+        gl.uniform2f(gl.getUniformLocation(p, "size"), canvas.width, canvas.height);
+        const loc = gl.getUniformLocation(p, "t");
+
+// const z = Date.now() / 1e3;
+        console.log(now);
+    gl.uniform1f(loc, now * 0.001);
+
     gl.drawArrays(gl.TRIANGLES, 0, 6);
+    requestAnimationFrame(draw);
+    }
+    draw();
 
-    gl.useProgram(null);
-    gl.deleteProgram(p);
+    // gl.useProgram(null);
+    // gl.deleteProgram(p);
 });
 </script>
 
