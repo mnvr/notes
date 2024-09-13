@@ -1,9 +1,9 @@
 ---
-title: Timing, and taste
+title: Timing and taste
 date: 2024-09-11
 ---
 
-# Timing, and taste
+# Timing and taste
 
 GitHub's cofounder on [why GitHub
 won](https://blog.gitbutler.com/why-github-actually-won/). Timing and taste
