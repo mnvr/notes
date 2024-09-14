@@ -1,5 +1,6 @@
 ---
 title: git diff branch
+description: Possibly you want "git diff ...branch" instead
 date: 2024-09-14
 ---
 
