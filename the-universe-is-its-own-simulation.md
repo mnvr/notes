@@ -17,7 +17,6 @@ onMounted(load);
 .cparent {
     aspect-ratio: 2/1;
     min-height: 200px;
-    border: 1px solid tomato;
     margin-block: 1rem;
 }
 </style>

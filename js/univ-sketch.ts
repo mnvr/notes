@@ -16,7 +16,7 @@ const aliveColor = "#00db5e";
  *
  * oklch(77% 0.242 151.39 / 0.75)
  */
-const inactiveColor = "#cbffd850";
+const inactiveColor = "#cbffd820";
 
 /** Load Q5 from CDN, and draw our sketch using it. */
 export const load = async () => {
@@ -64,7 +64,7 @@ const sketch = (p5: any, parent: HTMLElement) => {
     let cells: boolean[];
 
     p5.setup = () => {
-        p5.createCanvas(...sketchSize());
+        p5.createCanvas(...sketchSize(), undefined, { alpha: true });
 
         p5.frameRate(1);
 
