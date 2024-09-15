@@ -8,7 +8,6 @@ const cellD = 10;
  *
  * oklch(97% 0.242 151.39)
  */
-// const aliveColor = "#cbffd8";
 const aliveColor = "#00db5e";
 
 /**
@@ -85,6 +84,8 @@ const sketch = (p5: any, parent: HTMLElement) => {
         return [parent.scrollWidth, parent.scrollHeight];
     };
 
+    // NOTE: The resizing is not currently (q5.js 2.3.1) working, not sure if I
+    // need to do something differently than how it was with p5.
     p5.windowResized = () => p5.resizeCanvas(...sketchSize());
 
     /** Return a cells array initialized to all false values */
