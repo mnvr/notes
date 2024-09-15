@@ -1,28 +1,3 @@
-// Load Q5 from CDN, and draw our sketch using it.
-export const load = async () => {
-    await loadJS("https://q5js.org/q5.js");
-    // @ts-expect-error Q5 currently does not have TypeScript definitions.
-    const q5 = new Q5();
-
-    // The Q5 constructor takes an optional parent argument, but I was not able
-    // to get it to work (Sep 2024). As an alternative, move it there ourselves.
-    const parent = document.getElementById("canvas-parent")!;
-
-    q5.setup = () => {
-        q5.createCanvas(parent.scrollWidth, parent.scrollHeight);
-        setTimeout(() => parent.appendChild(q5.canvas), 0);
-    };
-};
-
-/** Load a non-ESM script from the given {@link src} URL. */
-const loadJS = async (src: string) =>
-    new Promise<void>((resolve) => {
-        const scriptTag = document.createElement("script");
-        scriptTag.src = src;
-        scriptTag.onload = () => resolve();
-        document.getElementsByTagName("head")[0].appendChild(scriptTag);
-    });
-
 /**
  * Dimensions of the (covering) rectangle used by each cell.
  */
@@ -43,10 +18,33 @@ const aliveColor = "#00db5e";
  */
 const inactiveColor = "#cbffd850";
 
+/** Load Q5 from CDN, and draw our sketch using it. */
+export const load = async () => {
+    await loadJS("https://q5js.org/q5.js");
+    // @ts-expect-error Q5 currently does not have TypeScript definitions.
+    const q5 = new Q5();
+
+    // The Q5 constructor takes an optional parent argument, but I was not able
+    // to get it to work (Sep 2024). As an alternative, move it there ourselves.
+    const parent = document.getElementById("canvas-parent")!;
+
+    sketch(q5, parent);
+    setTimeout(() => parent.appendChild(q5.canvas), 0);
+};
+
+/** Load a non-ESM script from the given {@link src} URL. */
+const loadJS = async (src: string) =>
+    new Promise<void>((resolve) => {
+        const scriptTag = document.createElement("script");
+        scriptTag.src = src;
+        scriptTag.onload = () => resolve();
+        document.getElementsByTagName("head")[0].appendChild(scriptTag);
+    });
+
 /**
  * Simulate a game of life.
  */
-const sketch = (p5: any) => {
+const sketch = (p5: any, parent: HTMLElement) => {
     /** Number of rows ("y" or "j" values)  in `cells` */
     let rows: number;
     /** Number of columns ("x" or "i") in `cells` */
@@ -81,10 +79,10 @@ const sketch = (p5: any) => {
     };
 
     /**
-     * Create a sketch that fills the entire window (the first screenful of it).
+     * Create a sketch that fills the entire container.
      */
     const sketchSize = (): [number, number] => {
-        return [p5.windowWidth, p5.windowHeight];
+        return [parent.scrollWidth, parent.scrollHeight];
     };
 
     p5.windowResized = () => p5.resizeCanvas(...sketchSize());
