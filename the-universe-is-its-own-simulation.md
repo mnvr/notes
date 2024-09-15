@@ -8,20 +8,20 @@ date: 2023-10-06
 
 <script setup>
 import { onMounted } from "vue";
-
 import { load } from "./js/univ-sketch.ts";
 
-onMounted(() => {
-    load();
-})
+onMounted(load);
 </script>
 
-<div id="canvas-parent">
-</div>
+<style module>
+#canvas-parent {
+    aspect-ratio: 2/1;
+    min-height: 200px;
+    border: 1px solid tomato;
+}
+</style>
 
-<ClientOnly>
-{{ 1 + 1 }}
-</ClientOnly>
+<div id="canvas-parent"></div>
 
 _The universe is its own, uncompressible, simulation._
 
