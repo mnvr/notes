@@ -4,18 +4,13 @@ export const load = async () => {
     // @ts-expect-error Q5 currently does not have TypeScript definitions.
     const q5 = new Q5();
 
-    q5.setup = () => {
-        const width = Math.round(Math.min(400, window.innerWidth * 0.9));
-        const height = Math.round((width * 3) / 5);
-        q5.createCanvas(width, height);
+    // The Q5 constructor takes an optional parent argument, but I was not able
+    // to get it to work (Sep 2024). As an alternative, move it there ourselves.
+    const parent = document.getElementById("canvas-parent")!;
 
-        setTimeout(() => {
-            // The Q5 constructor takes an optional parent argument, but I was not
-            // able to get it to work (Sep 2024). As an alternative, move it there
-            // ourselves.
-            const parent = document.getElementById("canvas-parent")!;
-            parent.appendChild(q5.canvas);
-        }, 0);
+    q5.setup = () => {
+        q5.createCanvas(parent.scrollWidth, parent.scrollHeight);
+        setTimeout(() => parent.appendChild(q5.canvas), 0);
     };
 };
 

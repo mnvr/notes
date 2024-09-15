@@ -14,14 +14,15 @@ onMounted(load);
 </script>
 
 <style module>
-#canvas-parent {
+.cparent {
     aspect-ratio: 2/1;
     min-height: 200px;
     border: 1px solid tomato;
+    margin-block: 1rem;
 }
 </style>
 
-<div id="canvas-parent"></div>
+<div id="canvas-parent" :class="$style.cparent"></div>
 
 _The universe is its own, uncompressible, simulation._
 
