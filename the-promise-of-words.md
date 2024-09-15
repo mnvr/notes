@@ -1,10 +1,10 @@
 ---
-title: The Promise of Words
+title: The promise of words
 description: Beautiful & binding, but are they any good?
 date: 2023-09-29
 ---
 
-# The Promise of Words
+# The promise of words
 
 _Beautiful & binding, but are they any good?_
 
