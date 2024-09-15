@@ -15,9 +15,9 @@ I didn't find a 3rd example, but I thought maybe that was a good omen,
 cautiously eyeing the number 3.
 
 That discovery was both incorrect and correct. Python did not die. It caused
-incalculable pain and suffering to all involved over a totally avoidable
-breaking change, but it survived. Vue did the jump from v2 to v3 successfully.
-And I never found a third example.
+pain and suffering to all involved over a totally avoidable breaking change, but
+it survived. Vue did the jump from v2 to v3 successfully. And I never found a
+third example.
 
 But it is also correct. It is not number 3 that has any significance. But there
 is a curse indeed, the curse of too much, too late, too soon.
