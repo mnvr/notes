@@ -16,7 +16,7 @@ onMounted(load);
 <style module>
 .cparent {
     aspect-ratio: 2/1;
-    min-height: 200px;
+    min-height: 160px;
     margin-block: 1rem;
 }
 </style>
