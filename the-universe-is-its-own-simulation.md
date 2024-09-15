@@ -6,6 +6,23 @@ date: 2023-10-06
 
 # The universe is its own simulation
 
+<script setup>
+import { onMounted } from "vue";
+
+import { load } from "./js/univ-sketch.ts";
+
+onMounted(() => {
+    load();
+})
+</script>
+
+<div id="canvas-parent">
+</div>
+
+<ClientOnly>
+{{ 1 + 1 }}
+</ClientOnly>
+
 _The universe is its own, uncompressible, simulation._
 
 Years ago, I read Candide by Voltaire. In the foreword it was mentioned that
