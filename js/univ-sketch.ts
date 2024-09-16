@@ -17,33 +17,10 @@ const aliveColor = "#00db5e";
  */
 const inactiveColor = "#cbffd820";
 
-/** Load Q5 from CDN, and draw our sketch using it. */
-export const load = async () => {
-    await loadJS("https://q5js.org/q5.js");
-    // @ts-expect-error Q5 currently does not have TypeScript definitions.
-    const q5 = new Q5();
-
-    // The Q5 constructor takes an optional parent argument, but I was not able
-    // to get it to work (Sep 2024). As an alternative, move it there ourselves.
-    const parent = document.getElementById("canvas-parent")!;
-
-    sketch(q5, parent);
-    setTimeout(() => parent.appendChild(q5.canvas), 0);
-};
-
-/** Load a non-ESM script from the given {@link src} URL. */
-const loadJS = async (src: string) =>
-    new Promise<void>((resolve) => {
-        const scriptTag = document.createElement("script");
-        scriptTag.src = src;
-        scriptTag.onload = () => resolve();
-        document.getElementsByTagName("head")[0].appendChild(scriptTag);
-    });
-
 /**
  * Simulate a game of life.
  */
-const sketch = (p5: any, parent: HTMLElement) => {
+export const sketch = (p5: any, parent: HTMLElement) => {
     /** Number of rows ("y" or "j" values)  in `cells` */
     let rows: number;
     /** Number of columns ("x" or "i") in `cells` */

@@ -8,9 +8,10 @@ date: 2023-10-06
 
 <script setup>
 import { onMounted } from "vue";
-import { load } from "./js/univ-sketch.ts";
+import { loadQ5 } from "./js/q5.ts";
+import { sketch } from "./js/univ-sketch.ts";
 
-onMounted(load);
+onMounted(() => loadQ5(sketch, "canvas-parent"));
 </script>
 
 <style module>
