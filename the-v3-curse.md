@@ -47,9 +47,9 @@ writing this rant). These are the package managers seen by npm, the JavaScript
 package registry
 ([source](https://github.com/nodejs/node/issues/50963#issuecomment-1885881236)):
 
--   64% npm (all versions)
--   25% yarn v1
--   9% pnpm (all versions)
+- 64% npm (all versions)
+- 25% yarn v1
+- 9% pnpm (all versions)
 
 Yarn 1 (aka yarn classic), accounting for 25% of all traffic, is unmaintained.
 The team has been working on a newer, backwards incompatible, yarn for years. Go

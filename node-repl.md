@@ -9,7 +9,7 @@ date: 2024-08-30
 Using node as a REPL
 
 ```js
-eval(require("fs").readFileSync("foo.js", "utf-8"))
+eval(require("fs").readFileSync("foo.js", "utf-8"));
 ```
 
 Unlike `.load`, this doesn't add history entries.

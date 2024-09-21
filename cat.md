@@ -1,7 +1,7 @@
 ---
 title: Useful use of cat
 description:
-    Against the thoughtless perpetration of the "useless use of cat" meme
+  Against the thoughtless perpetration of the "useless use of cat" meme
 date: 2024-02-18
 ---
 

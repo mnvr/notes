@@ -5,9 +5,9 @@ date: 2024-09-11
 
 # Timing and taste
 
-GitHub's cofounder on [why GitHub
-won](https://blog.gitbutler.com/why-github-actually-won/). Timing and taste
-resonating with each other.
+GitHub's cofounder on
+[why GitHub won](https://blog.gitbutler.com/why-github-actually-won/). Timing
+and taste resonating with each other.
 
 > <p>All four GitHub cofounders had flops before and after GitHub. These ventures
 > had taste, but it wasn't the right time or market.</p>

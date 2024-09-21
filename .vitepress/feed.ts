@@ -5,34 +5,34 @@ import path from "path";
 const baseURL = "https://notes.mrmr.io";
 
 export const generateFeed = async (config: SiteConfig) => {
-    const pages = await createContentLoader("*.md").load();
-    const pageData = pages
-        .map(({ url, frontmatter }) => {
-            const { title, date } = frontmatter;
-            // Ignore pages that don't have a frontmatter date (e.g. /random).
-            if (!title || !date) return undefined;
-            // `url` is the slug.
-            const href = baseURL + url;
-            return { title, date, href };
-        })
-        .filter((s) => !!s)
-        // Descending order, most recent first
-        .sort((a, b) => b.date - a.date);
+  const pages = await createContentLoader("*.md").load();
+  const pageData = pages
+    .map(({ url, frontmatter }) => {
+      const { title, date } = frontmatter;
+      // Ignore pages that don't have a frontmatter date (e.g. /random).
+      if (!title || !date) return undefined;
+      // `url` is the slug.
+      const href = baseURL + url;
+      return { title, date, href };
+    })
+    .filter((s) => !!s)
+    // Descending order, most recent first
+    .sort((a, b) => b.date - a.date);
 
-    const entries = pageData
-        .map(
-            ({ title, date, href }) =>
-                `  <entry>
+  const entries = pageData
+    .map(
+      ({ title, date, href }) =>
+        `  <entry>
     <title>${title}</title>
     <link href="${href}"/>
     <id>${href}</id>
     <updated>${date.toISOString()}</updated>
-  </entry>`
-        )
-        .join("\n");
+  </entry>`,
+    )
+    .join("\n");
 
-    const updated = pageData[0]!.date;
-    const feed = `<?xml version="1.0" encoding="utf-8"?>
+  const updated = pageData[0]!.date;
+  const feed = `<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Notes by Manav</title>
   <id>${baseURL}</id>
@@ -45,5 +45,5 @@ ${entries}
 </feed>
 `;
 
-    await writeFile(path.join(config.outDir, "feed.xml"), feed);
+  await writeFile(path.join(config.outDir, "feed.xml"), feed);
 };

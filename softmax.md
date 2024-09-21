@@ -10,8 +10,8 @@ That is, the numbers will all be between 0 and 1, and will sum together to 1.
 
 ```js
 const sm = (xs) => {
-    const s = xs.map(Math.exp).reduce((a, x) => a + x, 0);
-    return xs.map((x) => Math.exp(x) / s);
+  const s = xs.map(Math.exp).reduce((a, x) => a + x, 0);
+  return xs.map((x) => Math.exp(x) / s);
 };
 ```
 

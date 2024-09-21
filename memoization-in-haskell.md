@@ -207,9 +207,9 @@ You might say that what if we want to memoize a function that returns something
 other than a `Int`, or whose memo table has a different type like a `Map`? Easy
 peasy, we can just parameterize these two types:
 
--   Let us call the type of the state as `s`.
+- Let us call the type of the state as `s`.
 
--   Let us call the result type as `a`.
+- Let us call the result type as `a`.
 
 So we end up with this pattern - any function that we want to memoize will take
 as many arguments, and of varying types, as it needs. The only requirement we
@@ -431,9 +431,9 @@ To get the compiler to be happy, the code needs to be changed to:
    directly wrapped in a `pure`.
 
 2. Remove the `runStateT` and stop passing the state to fib, instead just return
-   the fib values themselves (Reminder that `fib x` is a value of type `State
-   Cache Int`, which is a state monad, which is what we should be passing into
-   and returning from `>>=`).
+   the fib values themselves (Reminder that `fib x` is a value of type
+   `State Cache Int`, which is a state monad, which is what we should be passing
+   into and returning from `>>=`).
 
 > I'm not sure how helpful this is being – for people who don't have the
 > necessary background these might be arbitrary changes. I'll think of better
@@ -486,8 +486,8 @@ In the final result, we're not actually using the value chained from the put,
 which is why we ignore it using the underscore wildcard. This is a common thing
 \- sometimes we just want two things to happen one after the other, but the
 second thing doesn't use the result of the first. It is so common, that the
-Haskell standard library provides a sequence operator `>>` to shorten this `>>=
-\_ ->` pattern.
+Haskell standard library provides a sequence operator `>>` to shorten this
+`>>= \_ ->` pattern.
 
 So after changing the last two lines to
 

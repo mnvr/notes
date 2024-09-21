@@ -82,8 +82,8 @@ aspect ratio (that is, be twice as wide as it is high).
 
 ```css
 canvas {
-    width: 100%;
-    aspect-ratio: 2/1;
+  width: 100%;
+  aspect-ratio: 2/1;
 }
 ```
 

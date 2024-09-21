@@ -12,8 +12,8 @@ Today I added a workaround that uses an "npm rebuild" step. After this, the app
 stopped running with an error about a transitive dependency (_The exact issue is
 not important, just see if you can follow the plot_).
 
-I spent a lot of time thinking it was a npm/yarn difference, but the problem
-was something else entirely - as part of making these changes I had noticed a
+I spent a lot of time thinking it was a npm/yarn difference, but the problem was
+something else entirely - as part of making these changes I had noticed a
 deprecation warning for node 16 in our GitHub action, and had changed it to node
 20, forgetting about it. Aha, so that was the real issue!
 

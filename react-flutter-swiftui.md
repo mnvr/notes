@@ -15,9 +15,9 @@ Here is hello world in React:
 
 ```js
 function Counter() {
-    const [c, setC] = useState(0);
-    const handleClick = () => setC(c + 1);
-    return <button onClick={handleClick}>{c}</button>;
+  const [c, setC] = useState(0);
+  const handleClick = () => setC(c + 1);
+  return <button onClick={handleClick}>{c}</button>;
 }
 ```
 
@@ -65,9 +65,9 @@ function components, and that’s the DNA it reflects.
 
 At the surface level, SwiftUI might look like it uses the class based approach,
 but that’s not the case - those SwiftUI structs are actually stateless, and what
-looks like an inheritance from "View" is protocol conformance. So the `struct
-Counter: View` in the SwiftUI example above can be thought of as equivalent to
-the stateless JavaScript functions that form React components.
+looks like an inheritance from "View" is protocol conformance. So the
+`struct Counter: View` in the SwiftUI example above can be thought of as
+equivalent to the stateless JavaScript functions that form React components.
 
 A part of the practical popularity of React comes because of JSX, which is an
 elaborate macro system built on top of JavaScript. The "React-y code" we write,

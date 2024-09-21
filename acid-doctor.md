@@ -14,11 +14,11 @@ is moving around in its environment after hatching as their mother.
 
 It is not as drastic in people, but it does happen. Some examples:
 
--   Vocal accents are imprinted in the formative years of a child.
+- Vocal accents are imprinted in the formative years of a child.
 
--   Children with cataracts, if left untreated in their formative years, remain
-    blind even if the cataracts are removed later (the eyes can see, but the
-    brain can't).
+- Children with cataracts, if left untreated in their formative years, remain
+  blind even if the cataracts are removed later (the eyes can see, but the brain
+  can't).
 
 Critical periods have measurable neurobiological markers.
 

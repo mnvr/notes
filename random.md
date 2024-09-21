@@ -2,9 +2,9 @@
 # The contents of this page are dynamic, so ask crawlers to not index it lest
 # they get confused by its shapeshifting nature.
 head:
-    - - meta
-      - name: robots
-        content: noindex
+  - - meta
+    - name: robots
+      content: noindex
 ---
 
 <script setup>
