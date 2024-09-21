@@ -8,12 +8,12 @@ date: 2023-11-30
 
 _When a rose by any other name would do_
 
-TypeScript provides <mark>structural typing</mark>. If it walks like a duck, and
+TypeScript provides <b>structural typing</b>. If it walks like a duck, and
 quacks like a duck, for TypeScript, it is a duck. TypeScript does not care at
 all what name you give to the type.
 
-Haskell provides <mark>nominal typing</mark>. It must be called a duck for it to
-be considered a duck. A rose by any other name won’t do.
+Haskell provides <b>nominal typing</b>. It must be called a duck for it to be
+considered a duck. A rose by any other name won’t do.
 
 Which of these two approaches are better? I think it too early, and too
 sweeping, a comparison to be valid.
