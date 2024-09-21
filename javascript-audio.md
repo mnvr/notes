@@ -4,9 +4,30 @@ description: An elementary introduction to JavaScript audio
 date: 2024-01-25
 ---
 
+<script setup>
+import { onMounted } from "vue";
+import * as js from "./js/javascript-audio.ts";
+
+let firstSoundClick;
+onMounted(() => {
+  firstSoundClick = js.onClick1;
+})
+</script>
+
+<style module>
+  button.demo {
+    padding: 8px;
+    border: 1px solid green;
+  }
+</style>
+
 # Making music in Javascript
 
 _An elementary introduction to JavaScript audio_
+
+<!-- {oscNode ? "Pause" : "Play"} -->
+
+<button @click="js.onClick1" :class="$style.demo">Play / Pause</button>
 
 ### First sound
 
