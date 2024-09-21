@@ -91,14 +91,13 @@ Setup things so that the following JavaScript code runs after your document has
 loaded. For example, this page is using VitePress, so I wrote it inside an
 `onMounted` lifecycle hook.
 
-<!-- prettier-ignore -->
-```js
+```vue
 <script setup>
 import { onMounted } from "vue";
 
 onMounted(() => {
-    // Rest of the code will go here...
-})
+  // Rest of the code will go here...
+});
 </script>
 ```
 
@@ -161,7 +160,6 @@ gl.compileShader(fs);
 
 And tell the WebGL context of our canvas to use them.
 
-<!-- prettier-ignore -->
 ```js
 const p = gl.createProgram();
 gl.attachShader(p, vs);

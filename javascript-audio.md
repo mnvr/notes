@@ -22,7 +22,6 @@ two ways of making sounds:
 
 Let's make a sound using the first method.
 
-<!-- prettier-ignore -->
 ```js
 const ctx = new AudioContext();
 ctx.resume();
@@ -52,21 +51,20 @@ stopping.
 
 Let's add them to our sound. And also move it to a function.
 
-<!-- prettier-ignore -->
 ```js
 const beep = (duration) => {
-    const attack = 0.001; // Attack of 1 ms
-    const release = 0.1; // Release of 100 ms
-    const t = ctx.currentTime;
+  const attack = 0.001; // Attack of 1 ms
+  const release = 0.1; // Release of 100 ms
+  const t = ctx.currentTime;
 
-    const osc = new OscillatorNode(ctx);
-    const env = new GainNode(ctx);
-    env.gain.setValueCurveAtTime([0, 1], t, attack);
-    env.gain.setTargetAtTime(0, t + attack + duration, release / 5);
-    const mix = new GainNode(ctx, { gain: 0.1 });
-    osc.connect(env).connect(mix).connect(ctx.destination);
-    osc.start();
-    osc.stop(t + attack + duration + release);
+  const osc = new OscillatorNode(ctx);
+  const env = new GainNode(ctx);
+  env.gain.setValueCurveAtTime([0, 1], t, attack);
+  env.gain.setTargetAtTime(0, t + attack + duration, release / 5);
+  const mix = new GainNode(ctx, { gain: 0.1 });
+  osc.connect(env).connect(mix).connect(ctx.destination);
+  osc.start();
+  osc.stop(t + attack + duration + release);
 };
 ```
 
@@ -106,10 +104,9 @@ for us, 7 times every second.
 
 </small>
 
-<!-- prettier-ignore -->
 ```js
 setInterval(() => {
-    beep(0.01);
+  beep(0.01);
 }, 1000 / 7);
 ```
 
