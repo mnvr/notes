@@ -5,7 +5,8 @@ date: 2023-11-20
 
 <style module>
     .content {
-        background-color: #ff0000;
+        background-color: #ff000040;
+
         color: #222;
         border-radius: 3px;
         padding: 16px;
@@ -22,7 +23,17 @@ date: 2023-11-20
 
         p:nth-child(even) {
             font-weight: 500;
-            color: white;
+            color: #666;
+
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .content {background-color: #aabb0099;
+
+            p:nth-child(even) {
+                color: white;
+            }
         }
     }
 </style>
