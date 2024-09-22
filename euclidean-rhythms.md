@@ -5,33 +5,58 @@ date: 2024-01-31
 ---
 
 <script setup>
-import { reactive, computed, watch, useCssModule, onMounted } from "vue";
+import { reactive, computed, watch, watchEffect, useCssModule, onMounted } from "vue";
 import { beep } from "./js/javascript-audio.ts";
+import { E } from "./js/euclid.ts";
+import { e38, initialCycleState, cycleTick,  } from "./js/euclidean-rhythms.ts";
 
 const { demo, playing } = useCssModule();
 
-const e38 = [1, 0, 0, 1, 0, 0, 1, 0];
+// Demo 1 ---
 
-const ticker = reactive({  i: 0, intervalId: undefined });
+const ticker1 = reactive({  i: 0, intervalId: undefined });
+
 const toggleTicker = () => {
-  if (ticker.intervalId) {
-    clearInterval(ticker.intervalId);
-    ticker.intervalId = undefined;
+  if (ticker1.intervalId) {
+    ticker1.intervalId = (clearInterval(ticker1.intervalId), undefined);
   } else {
-    ticker.intervalId = setInterval(() => {
-      ticker.i = (ticker.i + 1) % e38.length;
+    ticker1.intervalId = setInterval(() => {
+      ticker1.i = (ticker1.i + 1) % e38.length;
     }, 1000 / 7);
   }
 }
 
-const seqE38 = computed(() =>
-  e38.map((v, i) => ticker.intervalId && v && ticker.i == i)
+const seq1 = computed(() =>
+  e38.map((v, i) => ticker1.intervalId && v && ticker1.i == i)
 );
 
-watch(ticker, ({intervalId, i}) => intervalId && e38[i] && beep(0.01))
+watch(ticker1, ({intervalId, i}) => intervalId && e38[i] && beep(0.01))
 
-const class1 = computed(() => [demo, ticker.intervalId && playing]);
+const class1 = computed(() => [demo, ticker1.intervalId && playing]);
 
+// Demo 2 ---
+
+const ticker2 = reactive({  state: initialCycleState, intervalId: undefined });
+const cycle = () => {
+  if (ticker2.intervalId) {
+    ticker2.intervalId = (clearInterval(ticker2.intervalId), undefined);
+  } else {
+    ticker2.intervalId = setInterval(() => {
+      ticker2.state = cycleTick(ticker2.state);
+    }, 1000 / 7);
+  }
+}
+
+const seq2 = computed(() => {
+  const { k, n, p } = ticker2.state;
+  return E(k, n).map((v, i) => ticker2.intervalId && v && p == i)
+});
+
+watchEffect(() =>
+  ticker2.intervalId && seq2.value[ticker2.state.p] && beep(0.01)
+)
+
+const class2 = computed(() => [demo, ticker2.intervalId && playing]);
 </script>
 
 <style module>
@@ -74,7 +99,13 @@ button.playing {
 # Euclid and music
 
 <div :class="$style.beats" style="margin-block-start: 2rem">
-<div v-for="s in seqE38" :data-on="s"></div>
+<div v-for="s in seq2" :data-on="s"></div>
+</div>
+
+<button @click="cycle" :class="class2">Play / Pause</button>
+
+<div :class="$style.beats" style="margin-block-start: 2rem">
+<div v-for="s in seq1" :data-on="s"></div>
 </div>
 
 <button @click="toggleTicker" :class="class1">Play / Pause</button>
