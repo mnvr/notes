@@ -25,10 +25,10 @@ In SwiftUI:
 
 ```swift
 struct Counter: View {
-    @State var c = 0
-    var body: some View {
-        Button("\(c)") { c = c + 1 }
-    }
+  @State var c = 0
+  var body: some View {
+    Button("\(c)") { c = c + 1 }
+  }
 }
 ```
 
@@ -36,19 +36,19 @@ And in Flutter:
 
 ```dart
 class Counter extends StatefulWidget {
-    @override
-    State<Counter> createState() => _CounterState();
+  @override
+  State<Counter> createState() => _CounterState();
 }
 
 class _CounterState extends State<Counter> {
-    int _c = 0;
+  int _c = 0;
 
-    @override
-    Widget build(BuildContext context) {
-      return TextButton(
-          onPressed: () { setState(() { _c++; }); },
-          child: Text('$_c'));
-    }
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+        onPressed: () { setState(() { _c++; }); },
+        child: Text('$_c'));
+  }
 }
 ```
 

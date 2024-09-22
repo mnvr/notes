@@ -9,6 +9,15 @@ date: 2023-09-29
 _Beautiful & binding, but are they any good?_
 
 <style module>
+.prose {
+    margin-block: 2rem;
+}
+
+.prose hr {
+    opacity: 0.1;
+    margin: 2rem;
+}
+
 .prose p {
     border-radius: 2px;
     border: 1px solid oklch(54% 0.22 29);
@@ -40,9 +49,7 @@ _Beautiful & binding, but are they any good?_
 }
 </style>
 
-<div :class="$style.prose" >
-
-<br />
+<div :class="$style.prose">
 
 Writing words, logical arguments. It is fun when I am constructing these
 elaborate structures, but is it useful? I can make them as elaborate as I want,
@@ -51,8 +58,7 @@ but are they true?
 This very village of words right here, growing in front of my eyes to be a
 metropolis, does this have any semblance to reality?
 
-<br />
-<br />
+<hr>
 
 Words are beautiful. Each word is a frozen metaphor, spanning ages and
 languages. Each sentence takes these already extraordinarily beautiful,
@@ -72,8 +78,7 @@ sentences, it has a fraction more dimension than that. Not quite 2 D, but say
 
 But I digress.
 
-<br />
-<br />
+<hr>
 
 Most people are unaware of the absolute monstrosity of the abstract kingdom of
 mathematics that has been constructed over thousands of years by a few tens of
@@ -97,9 +102,6 @@ currently and ultimately false?
 Or am I to realize that words don't have the power to bind me, and I can play
 in, and with, them regardless of the shadows they may cast to the people looking
 on?
-
-<br />
-<br />
 
 </div>
 
