@@ -5,7 +5,26 @@ date: 2024-01-31
 ---
 
 <script setup>
-import { ref } from "vue";
+import { reactive, computed, useCssModule, onMounted } from "vue";
+
+const seqE38 = [1, 0, 0, 1, 0, 0, 1, 0];
+
+const ticker = reactive({  i: 0, intervalId: undefined });
+const toggleTicker = () => {
+  if (ticker.intervalId) {
+    clearInterval(ticker.intervalId);
+    ticker.intervalId = undefined;
+  } else {
+    ticker.intervalId = setInterval(() => {
+      ticker.i = (ticker.i + 1) % seqE38.length;
+    }, 1000 / 7);
+  }
+}
+const i = computed(() => ticker.i);
+
+const { demo, playing } = useCssModule();
+const classB1 = computed(() => [demo, ticker.intervalId && playing]);
+
 </script>
 
 <style module>
@@ -33,6 +52,18 @@ import { ref } from "vue";
 .E38 > div.on {
   background-color: tomato;
 }
+
+.demo {
+  padding-inline: 12px;
+  padding-block: 4px;
+  min-width: 5rem;
+  border: 1px solid gray;
+  border-radius: 3px;
+}
+
+.playing {
+  border-color: tomato;
+}
 </style>
 
 # Euclid and music
@@ -47,6 +78,8 @@ import { ref } from "vue";
 <div></div>
 <div></div>
 </div>
+
+<button @click="toggleTicker" :class="classB1">Play / Pause</button>
 
 ### Euclid's algorithm
 

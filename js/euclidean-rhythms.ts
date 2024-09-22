@@ -1,5 +1,37 @@
-import { getAudioContext, createBeep } from "./javascript-audio.ts";
+import { createBeep } from "./javascript-audio.ts";
 import { E } from "./euclid.ts";
+
+interface E38State {
+  intervalID: number | undefined;
+  seqIndex: number;
+}
+
+export const e38Seq = (() => {
+  const seq = [1, 0, 0, 1, 0, 0, 1, 0];
+  const seq2 = E(3, 8);
+  console.assert(JSON.stringify(seq) == JSON.stringify(seq2));
+  return seq;
+})();
+
+export const toggleE38 = ({ intervalID, seqIndex }: E38State) => {
+  if (intervalID) {
+    clearInterval(intervalID);
+    return { intervalID: undefined, seqIndex };
+  } else {
+    intervalID = setInterval(
+        () => setSeqIndex((seqIndex) => (seqIndex + 1) % seq.length),
+        1000 / 7
+      )
+    );
+    return
+  }
+};
+
+useEffect(() => {
+  if (intervalID && seq[seqIndex]) {
+    beep(getAudioContext(), 0.01);
+  }
+}, [intervalID, seqIndex]);
 
 export const E38: React.FC = () => {
   const getAudioContext = useAudioContext();

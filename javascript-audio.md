@@ -25,24 +25,27 @@ const beep = () => {
 };
 const classB2 = computed(() => [demo, oscNode2.value && playing]);
 
-const intervalID = ref();
-const beeps = () => (intervalID.value = toggleBeeps(intervalID.value));
-const classB3 = computed(() => [demo, intervalID.value && playing]);
+const intervalId = ref();
+const beeps = () => (intervalId.value = toggleBeeps(intervalId.value));
+const classB3 = computed(() => [demo, intervalId.value && playing]);
 
 onUnmounted(() => {
   oscNode1.value && toggleFirstSound(oscNode1.value);
-  intervalID.value && toggleBeeps(intervalID.value);
+  intervalId.value && toggleBeeps(intervalId.value);
 });
 </script>
 
 <style module>
 .demo {
-  padding: 8px;
+  padding-inline: 12px;
+  padding-block: 4px;
   min-width: 5rem;
   border: 1px solid gray;
+  border-radius: 3px;
 }
+
 .playing {
-  border-color: green;
+  border-color: tomato;
 }
 </style>
 
@@ -72,7 +75,7 @@ ctx.resume();
 
 const osc = new OscillatorNode(ctx);
 // Reduce volume, the default is too loud!
-const mix = new GainNode(ctx, { gain: 0.05 });
+const mix = new GainNode(ctx, { gain: 0.1 });
 osc.connect(mix).connect(ctx.destination);
 osc.start();
 ```
@@ -105,7 +108,7 @@ const beep = (duration) => {
   const env = new GainNode(ctx);
   env.gain.setValueCurveAtTime([0, 1], t, attack);
   env.gain.setTargetAtTime(0, t + attack + duration, release / 5);
-  const mix = new GainNode(ctx, { gain: 0.05 });
+  const mix = new GainNode(ctx, { gain: 0.1 });
   osc.connect(env).connect(mix).connect(ctx.destination);
   osc.start();
   osc.stop(t + attack + duration + release);

@@ -42,7 +42,7 @@ export const toggleFirstSound = (oscNode: OscillatorNode | undefined) => {
   } else {
     const ctx = getAudioContext();
     const osc = new OscillatorNode(ctx);
-    const mix = new GainNode(ctx, { gain: 0.05 });
+    const mix = new GainNode(ctx, { gain: 0.1 });
     osc.connect(mix).connect(ctx.destination);
     osc.start();
     return osc;
@@ -60,7 +60,7 @@ export const createBeep = (duration: number, attack = 0.001, release = 0.1) => {
   env.gain.setValueCurveAtTime([0, 1], t, attack);
   env.gain.setTargetAtTime(0, t + attack + duration, release / 5);
 
-  const mix = new GainNode(ctx, { gain: 0.05 });
+  const mix = new GainNode(ctx, { gain: 0.1 });
 
   osc.connect(env).connect(mix).connect(ctx.destination);
   osc.start();
