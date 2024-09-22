@@ -94,15 +94,19 @@ button.playing {
     background-color: tomato;
   }
 }
+
+.beats.cycle {
+  height: 40px;
+
+  justify-content: space-between;
+
+  & > div {
+    width: 20px;
+  }
+}
 </style>
 
 # Euclid and music
-
-<div :class="$style.beats" style="margin-block-start: 2rem">
-<div v-for="s in seq2" :data-on="s"></div>
-</div>
-
-<button @click="cycle" :class="class2">Play / Pause</button>
 
 <div :class="$style.beats" style="margin-block-start: 2rem">
 <div v-for="s in seq1" :data-on="s"></div>
@@ -189,7 +193,12 @@ Here is a player that cycles through various Euclidean rhythms.
 
 I have listened to this for hours.
 
-<!-- <D.Cycle /> -->
+<div :class="[$style.beats, $style.cycle]" style="margin-block-start: 2rem">
+<div v-for="s in seq2" :data-on="s"></div>
+</div>
+
+<button @click="cycle" :class="class2">Play / Pause</button>
+
 
 ### Not just beats
 
