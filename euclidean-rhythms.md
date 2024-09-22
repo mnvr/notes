@@ -120,19 +120,23 @@ const seq4 = computed(() => {
   const seq38 = e38.map((v, i) => intervalId && v && p == i);
   const seqKN = eKN.map((v, i) => intervalId && v && p == i);
   const seq78 = e78.map((v, i) => intervalId && v && p == i);
-  if (intervalId) {
-    if (seq38[p % 8]) {
+  return {a: seq38, b: seqKN, c: seq78};
+});
+
+watchEffect(() => {
+  const { k, n, p } = ticker4.state;
+  if (ticker4.intervalId) {
+    if (seq4.value.a[p % 8]) {
       beep(0.01, 0.001, 0.1, 660);
     }
-    if (seqKN[p]) {
+    if (seq4.value.b[p]) {
       beep(0.01);
       beep(0.005, 0.001, 0.02, 660);
     }
-    if (seq78[p % 8]) {
+    if (seq4.value.c[p % 8]) {
       beep(0.1, 0.001, 0.1, 110);
     }
   }
-  return {a: seq38, b: seqKN, c: seq78};
 });
 
 const class4 = computed(() => [demo, ticker4.intervalId && playing]);
