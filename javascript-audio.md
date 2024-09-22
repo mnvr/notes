@@ -33,8 +33,8 @@ onUnmounted(() => {
 
 <style module>
 button.demo {
-  padding-inline: 12px;
-  padding-block: 4px;
+  padding-inline: 8px;
+  padding-block: 2px;
   min-width: 5rem;
   border: 1px solid gray;
   border-radius: 3px;

@@ -5,7 +5,10 @@ date: 2024-01-31
 ---
 
 <script setup>
-import { reactive, computed, useCssModule, onMounted } from "vue";
+import { reactive, computed, watch, useCssModule, onMounted } from "vue";
+import { beep } from "./js/javascript-audio.ts";
+
+const { demo, playing } = useCssModule();
 
 const e38 = [1, 0, 0, 1, 0, 0, 1, 0];
 
@@ -25,15 +28,16 @@ const seqE38 = computed(() =>
   e38.map((v, i) => ticker.intervalId && v && ticker.i == i)
 );
 
-const { demo, playing } = useCssModule();
+watch(ticker, ({intervalId, i}) => intervalId && e38[i] && beep(0.01))
+
 const class1 = computed(() => [demo, ticker.intervalId && playing]);
 
 </script>
 
 <style module>
 button.demo {
-  padding-inline: 12px;
-  padding-block: 4px;
+  padding-inline: 8px;
+  padding-block: 2px;
   min-width: 5rem;
   border: 1px solid gray;
   border-radius: 3px;
@@ -69,11 +73,13 @@ button.playing {
 
 # Euclid and music
 
-<div :class="$style.beats">
+<div :class="$style.beats" style="margin-block-start: 2rem">
 <div v-for="s in seqE38" :data-on="s"></div>
 </div>
 
 <button @click="toggleTicker" :class="class1">Play / Pause</button>
+
+This player is producing a beep at each `E(3, 8)` beat.
 
 ### Euclid's algorithm
 
@@ -131,20 +137,20 @@ fold is given by the value of `gcd(n, m)` at that step.
 When we call this function with two numbers (_the number of 1's_, and _the
 length of the sequence_), it returns a sequence where the 1's are maximally
 displaced. e.g. if you copy paste this code to your browser's developer tools,
-and then call `E(3,8)`, you'll get
+and then call `E(3, 8)`, you'll get
 
 ```
-> E(3,8)
+> E(3, 8)
 [1, 0, 0, 1, 0, 0, 1, 0]
 ```
-
-Surprisingly, this function is all we need to replicate many real world rhythms.
 
 > [!TIP]
 >
 > See
-> [the source code of this site](https://github.com/mnvr/mrmr.io/blob/main/pages/mj/euclid/er.js)
+> [the source code of this site](https://github.com/mnvr/notes/blob/main/js/er.js)
 > for a version of this function with comments and more examples.
+
+Surprisingly, this function is all we need to replicate many real world rhythms.
 
 ### Cycling with Euclid
 
