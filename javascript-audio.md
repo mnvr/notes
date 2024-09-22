@@ -15,7 +15,10 @@ let firstSoundClick = () => oscNode1.value = firstSound(oscNode1.value);
 <style module>
   button.demo {
     padding: 8px;
-    border: 1px solid green;
+    border: 1px solid gray;
+  }
+  button.playing {
+    border-color: green;
   }
 </style>
 
@@ -23,8 +26,8 @@ let firstSoundClick = () => oscNode1.value = firstSound(oscNode1.value);
 
 _An elementary introduction to JavaScript audio_
 
-<button @click="firstSoundClick"
-:class="$style.demo">{{ oscNode1 ? "Pause": "Play" }}</button>
+<button @click="firstSoundClick" :class="[$style.demo, oscNode1 &&
+$style.playing]"> Play / Pause </button>
 
 ### First sound
 
@@ -46,17 +49,19 @@ ctx.resume();
 
 const osc = new OscillatorNode(ctx);
 // Reduce volume, the default is too loud!
-const mix = new GainNode(ctx, { gain: 0.1 });
+const mix = new GainNode(ctx, { gain: 0.05 });
 osc.connect(mix).connect(ctx.destination);
 osc.start();
 ```
+
+That is what the button above does.
 
 <!-- <D.FirstSound /> -->
 
 ### Beep
 
-When you press the button above, you might've noticed a glitch when the sound
-started.
+When you toggle the button above, you'd notice a glitch when the sound starts
+and stops.
 
 Our ears are more sensitive than you might consciously imagine. When we start
 the sound above, it immediately starts playing, and this sudden movement is

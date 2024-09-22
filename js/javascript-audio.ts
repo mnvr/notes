@@ -61,7 +61,7 @@ export const firstSound = (oscNode: OscillatorNode | undefined) => {
   } else {
     const ctx = getAudioContext();
     const osc = new OscillatorNode(ctx);
-    const mix = new GainNode(ctx, { gain: 0.1 });
+    const mix = new GainNode(ctx, { gain: 0.05 });
     osc.connect(mix).connect(ctx.destination);
     osc.start();
     return osc;
