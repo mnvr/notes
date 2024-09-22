@@ -5,19 +5,30 @@ date: 2024-01-25
 ---
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { firstSound } from "./js/javascript-audio.ts";
+import { ref, computed, useCssModule, onMounted } from "vue";
+import { toggleFirstSound, createBeep } from "./js/javascript-audio.ts";
 
-let oscNode1 = ref();
-let firstSoundClick = () => oscNode1.value = firstSound(oscNode1.value);
+const { demo, playing } = useCssModule()
+
+const oscNode1 = ref();
+const firstSound = () => oscNode1.value = toggleFirstSound(oscNode1.value);
+const classB1 = computed(() => [demo, oscNode1.value && playing])
+
+const oscNode2 = ref();
+const beep = () => {
+  oscNode2.value = createBeep(0.2);
+  oscNode2.value.onended = () => (oscNode2.value = undefined);
+}
+const classB2 = computed(() => [demo, oscNode1.value && playing])
+
 </script>
 
 <style module>
-  button.demo {
+  .demo {
     padding: 8px;
     border: 1px solid gray;
   }
-  button.playing {
+  .playing {
     border-color: green;
   }
 </style>
@@ -26,8 +37,7 @@ let firstSoundClick = () => oscNode1.value = firstSound(oscNode1.value);
 
 _An elementary introduction to JavaScript audio_
 
-<button @click="firstSoundClick" :class="[$style.demo, oscNode1 &&
-$style.playing]"> Play / Pause </button>
+<button @click="firstSound" :class="classB1">Play / Pause</button>
 
 ### First sound
 
@@ -55,8 +65,6 @@ osc.start();
 ```
 
 That is what the button above does.
-
-<!-- <D.FirstSound /> -->
 
 ### Beep
 
@@ -91,7 +99,7 @@ const beep = (duration) => {
 };
 ```
 
-<!-- <D.Beep /> -->
+<button @click="beep" :class="classB2">Beep</button>
 
 ### Beeps
 
