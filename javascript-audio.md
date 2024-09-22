@@ -6,29 +6,33 @@ date: 2024-01-25
 
 <script setup>
 import { ref, computed, useCssModule, onMounted, onUnmounted } from "vue";
-import { toggleFirstSound, createBeep, toggleBeeps } from "./js/javascript-audio.ts";
+import {
+  toggleFirstSound,
+  createBeep,
+  toggleBeeps,
+} from "./js/javascript-audio.ts";
 
-const { demo, playing } = useCssModule()
+const { demo, playing } = useCssModule();
 
 const oscNode1 = ref();
-const firstSound = () => oscNode1.value = toggleFirstSound(oscNode1.value);
-const classB1 = computed(() => [demo, oscNode1.value && playing])
+const firstSound = () => (oscNode1.value = toggleFirstSound(oscNode1.value));
+const classB1 = computed(() => [demo, oscNode1.value && playing]);
 
 const oscNode2 = ref();
 const beep = () => {
   oscNode2.value = createBeep(0.2);
   oscNode2.value.onended = () => (oscNode2.value = undefined);
-}
-const classB2 = computed(() => [demo, oscNode2.value && playing])
+};
+const classB2 = computed(() => [demo, oscNode2.value && playing]);
 
-const intervalID = ref()
+const intervalID = ref();
 const beeps = () => (intervalID.value = toggleBeeps(intervalID.value));
 const classB3 = computed(() => [demo, intervalID.value && playing]);
 
 onUnmounted(() => {
   oscNode1.value && toggleFirstSound(oscNode1.value);
   intervalID.value && toggleBeeps(intervalID.value);
-})
+});
 </script>
 
 <style module>
@@ -115,8 +119,8 @@ const beep = (duration) => {
 Instead of clicking the button ourselves, let us ask the computer to click it
 for us, 7 times every second.
 
-<small>
 <blockquote>
+<small>
 
 Why 7?
 
@@ -138,12 +142,13 @@ the exact sound being played and a lot of other factors. 7 per second is a
 conservative value that we'll always hear as events and not as a single sound.
 
 7 is also interesting for other reasons (e.g.
-[musical scales usually max out at 7 notes](/raag) even though there are 12
-available to us). This might be related to <i>The Magical Number Seven, Plus or
-Minus Two</i>, but this aside is already too long and I'm now ranting.
+[musical scales usually max out at 7 notes](https://mrmr.io/raag) even though
+there are 12 available to us). This might be related to <i>The Magical Number
+Seven, Plus or Minus Two</i>, but this aside is already too long and I'm now
+ranting.
 
-</blockquote>
 </small>
+</blockquote>
 
 ```js
 setInterval(() => {
