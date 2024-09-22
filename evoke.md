@@ -4,38 +4,38 @@ date: 2023-11-20
 ---
 
 <style module>
-    .content {
-        background-color: #ff000040;
+.content {
+  background-color: #ff000040;
 
-        color: #222;
-        border-radius: 3px;
-        padding: 16px;
-        font-size: 1.5rem;
+  color: #222;
+  border-radius: 3px;
+  padding: 16px;
+  font-size: 1.5rem;
 
-        h1 {
-            font-weight: 600;
-            color: #222;
-        }
+  h1 {
+    font-weight: 600;
+    color: #222;
+  }
 
-        p {
-            font-weight: 600;
-        }
+  p {
+    font-weight: 600;
+  }
 
-        p:nth-child(even) {
-            font-weight: 500;
-            color: #666;
+  p:nth-child(even) {
+    font-weight: 500;
+    color: #666;
+  }
+}
 
-        }
+@media (prefers-color-scheme: dark) {
+  .content {
+    background-color: #aabb0099;
+
+    p:nth-child(even) {
+      color: white;
     }
-
-    @media (prefers-color-scheme: dark) {
-        .content {background-color: #aabb0099;
-
-            p:nth-child(even) {
-                color: white;
-            }
-        }
-    }
+  }
+}
 </style>
 
 <div :class="$style.content">

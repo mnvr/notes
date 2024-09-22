@@ -36,14 +36,14 @@ onUnmounted(() => {
 </script>
 
 <style module>
-  .demo {
-    padding: 8px;
-    min-width: 5rem;
-    border: 1px solid gray;
-  }
-  .playing {
-    border-color: green;
-  }
+.demo {
+  padding: 8px;
+  min-width: 5rem;
+  border: 1px solid gray;
+}
+.playing {
+  border-color: green;
+}
 </style>
 
 # Making music in Javascript

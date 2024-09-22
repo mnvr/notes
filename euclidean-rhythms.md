@@ -4,7 +4,49 @@ description: Visualizing Euclidean rhythms, using math to make music
 date: 2024-01-31
 ---
 
+<script setup>
+import { ref } from "vue";
+</script>
+
+<style module>
+.E38 {
+  height: 100px;
+  margin-block-start: 1em;
+  margin-block-end: 1.5em;
+
+  display: flex;
+  gap: 18px;
+}
+
+@media (width < 400px) {
+  .E38 {
+    gap: min((100% - 12 * 10px) / 11, 18px);
+  }
+}
+
+.E38 > div {
+  width: 10px;
+  border: 1px solid tomato;
+  box-sizing: border-box;
+}
+
+.E38 > div.on {
+  background-color: tomato;
+}
+</style>
+
 # Euclid and music
+
+<div :class="$style.E38">
+<div></div>
+<div></div>
+<div :class="$style.on"></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</div>
 
 ### Euclid's algorithm
 
@@ -26,8 +68,6 @@ both `n` and `m`. But really it is unravelling a number pair.
 
 In 2005, Godfried Toussaint realized that Euclid's algorithm encodes many drum
 beats. For example, here is `E(3, 8)`.
-
-<!-- <D.E38 /> -->
 
 ### Code
 
