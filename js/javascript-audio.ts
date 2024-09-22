@@ -1,9 +1,10 @@
 let ac: AudioContext | undefined;
 
-const getAudioContext = () => {
+export const getAudioContext = () => {
   if (!ac) {
     ac = new AudioContext();
   }
+
   // [Note: Safari iOS "interrupted" AudioContext]
   //
   // Always resume the context
@@ -28,6 +29,7 @@ const getAudioContext = () => {
   // functional impact that I can tell of.
 
   ac.resume();
+
   return ac;
 };
 
