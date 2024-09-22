@@ -54,6 +54,20 @@ export const beep = (
   osc.stop(t + attack + duration + release);
 };
 
+export const firstSound = (oscNode: OscillatorNode | undefined) => {
+  if (oscNode) {
+    oscNode.stop();
+    return undefined;
+  } else {
+    const ctx = getAudioContext();
+    const osc = new OscillatorNode(ctx);
+    const mix = new GainNode(ctx, { gain: 0.1 });
+    osc.connect(mix).connect(ctx.destination);
+    osc.start();
+    return osc;
+  }
+};
+
 export let oscNode1: OscillatorNode | undefined;
 export const onClick1 = () => {
   if (oscNode1) {

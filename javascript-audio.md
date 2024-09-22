@@ -5,13 +5,11 @@ date: 2024-01-25
 ---
 
 <script setup>
-import { onMounted } from "vue";
-import * as js from "./js/javascript-audio.ts";
+import { ref, onMounted } from "vue";
+import { firstSound } from "./js/javascript-audio.ts";
 
-let firstSoundClick;
-onMounted(() => {
-  firstSoundClick = js.onClick1;
-})
+let oscNode1 = ref();
+let firstSoundClick = () => oscNode1.value = firstSound(oscNode1.value);
 </script>
 
 <style module>
@@ -25,9 +23,8 @@ onMounted(() => {
 
 _An elementary introduction to JavaScript audio_
 
-<!-- {oscNode ? "Pause" : "Play"} -->
-
-<button @click="js.onClick1" :class="$style.demo">Play / Pause</button>
+<button @click="firstSoundClick"
+:class="$style.demo">{{ oscNode1 ? "Pause": "Play" }}</button>
 
 ### First sound
 
