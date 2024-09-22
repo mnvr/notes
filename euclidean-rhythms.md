@@ -70,9 +70,7 @@ button.playing {
 # Euclid and music
 
 <div :class="$style.beats">
-<template v-for="s in seqE38">
-<div :data-on="s"></div>
-</template>
+<div v-for="s in seqE38" :data-on="s"></div>
 </div>
 
 <button @click="toggleTicker" :class="class1">Play / Pause</button>
