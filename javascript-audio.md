@@ -5,8 +5,8 @@ date: 2024-01-25
 ---
 
 <script setup>
-import { ref, computed, useCssModule, onMounted } from "vue";
-import { toggleFirstSound, createBeep } from "./js/javascript-audio.ts";
+import { ref, computed, useCssModule, onMounted, onUnmounted } from "vue";
+import { toggleFirstSound, createBeep, suspend } from "./js/javascript-audio.ts";
 
 const { demo, playing } = useCssModule()
 
@@ -19,13 +19,22 @@ const beep = () => {
   oscNode2.value = createBeep(0.2);
   oscNode2.value.onended = () => (oscNode2.value = undefined);
 }
-const classB2 = computed(() => [demo, oscNode1.value && playing])
+const classB2 = computed(() => [demo, oscNode2.value && playing])
 
+const intervalID = ref()
+const beeps = () => (intervalID.value = toggleBeeps(intervalID.value));
+const classB3 = computed(() => [demo, intervalID.value && playing]);
+
+onUnmounted(() => {
+  oscNode1.value && toggleFirstSound(oscNode1.value);
+  intervalID && toggleBeeps(intervalID);
+})
 </script>
 
 <style module>
   .demo {
     padding: 8px;
+    min-width: 5rem;
     border: 1px solid gray;
   }
   .playing {
@@ -92,7 +101,7 @@ const beep = (duration) => {
   const env = new GainNode(ctx);
   env.gain.setValueCurveAtTime([0, 1], t, attack);
   env.gain.setTargetAtTime(0, t + attack + duration, release / 5);
-  const mix = new GainNode(ctx, { gain: 0.1 });
+  const mix = new GainNode(ctx, { gain: 0.05 });
   osc.connect(env).connect(mix).connect(ctx.destination);
   osc.start();
   osc.stop(t + attack + duration + release);
@@ -141,7 +150,7 @@ setInterval(() => {
 }, 1000 / 7);
 ```
 
-<!-- <D.Beeps /> -->
+<button @click="beeps" :class="classB3">Beeps</button>
 
 ### Rest of the owl
 
