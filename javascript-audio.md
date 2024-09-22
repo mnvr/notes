@@ -6,9 +6,12 @@ date: 2024-01-25
 
 <script setup>
 import { ref, computed, useCssModule, onMounted, onUnmounted } from "vue";
-import { toggleFirstTone, beep, toggleBeeps } from "./js/javascript-audio.ts";
+import { toggleFirstTone, beep } from "./js/javascript-audio.ts";
 
 const { demo, playing } = useCssModule();
+
+const toggleBeeps = (id) =>
+  id ? (clearInterval(id), undefined) : setInterval(() => beep(0.01), 1000 / 7);
 
 const osc1 = ref();
 const on1 = () => (osc1.value = toggleFirstTone(osc1.value));
@@ -196,7 +199,7 @@ more depth.
 
 > [!TIP]
 >
-> I also wrote a tutorial on <a href="https://mrmr.io/mj/euclid">making sounds
-> using Euclidean rhythms</a>.
+> I also wrote a tutorial on
+> [making sounds using Euclidean rhythms](/euclidean-rhythms).
 
 </small>

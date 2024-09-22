@@ -5,19 +5,47 @@ date: 2024-01-31
 ---
 
 <script setup>
-import { reactive, computed, watch, watchEffect, useCssModule, onMounted } from "vue";
+import {
+  reactive,
+  computed,
+  watch,
+  watchEffect,
+  useCssModule,
+  onMounted,
+} from "vue";
 import { beep } from "./js/javascript-audio.ts";
 import { E } from "./js/euclid.ts";
-import { initialCycleState, cycleTick } from "./js/euclidean-rhythms.ts";
 
 const { demo, playing } = useCssModule();
 
 const e38 = E(3, 8);
 const e78 = E(7, 8);
 
+const initialCycleState = {
+  k: 3 /* The `k` in `E(k, n)` */,
+  n: 4 /* The `n` in `E(k, n)` */,
+  p: 0 /** The phase of (i.e. the offset into) the current E(k, n) */,
+};
+
+const cycleTick = ({ k, n, p }) => {
+  p = p + 1;
+  if (p === n) {
+    p = 0;
+    k = k + 1;
+    if (k === n) {
+      k = n < 5 ? 1 : 3;
+      n = n + 1;
+      if (n === 13) {
+        n = 4;
+      }
+    }
+  }
+  return { k, n, p };
+};
+
 // Demo 1 --- E(3, 8)
 
-const ticker1 = reactive({  i: 0, intervalId: undefined });
+const ticker1 = reactive({ i: 0, intervalId: undefined });
 
 const toggleTicker = () => {
   if (ticker1.intervalId) {
@@ -27,19 +55,19 @@ const toggleTicker = () => {
       ticker1.i = (ticker1.i + 1) % e38.length;
     }, 1000 / 7);
   }
-}
+};
 
 const seq1 = computed(() =>
   e38.map((v, i) => ticker1.intervalId && v && ticker1.i == i)
 );
 
-watch(ticker1, ({intervalId, i}) => intervalId && e38[i] && beep(0.01))
+watch(ticker1, ({ intervalId, i }) => intervalId && e38[i] && beep(0.01));
 
 const class1 = computed(() => [demo, ticker1.intervalId && playing]);
 
 // Demo 2 --- Cycle
 
-const ticker2 = reactive({  state: initialCycleState, intervalId: undefined });
+const ticker2 = reactive({ state: initialCycleState, intervalId: undefined });
 const cycle = () => {
   if (ticker2.intervalId) {
     ticker2.intervalId = (clearInterval(ticker2.intervalId), undefined);
@@ -48,16 +76,16 @@ const cycle = () => {
       ticker2.state = cycleTick(ticker2.state);
     }, 1000 / 7);
   }
-}
+};
 
 const seq2 = computed(() => {
   const { k, n, p } = ticker2.state;
-  return E(k, n).map((v, i) => ticker2.intervalId && v && p == i)
+  return E(k, n).map((v, i) => ticker2.intervalId && v && p == i);
 });
 
-watchEffect(() =>
-  ticker2.intervalId && seq2.value[ticker2.state.p] && beep(0.01)
-)
+watchEffect(
+  () => ticker2.intervalId && seq2.value[ticker2.state.p] && beep(0.01)
+);
 
 const class2 = computed(() => [demo, ticker2.intervalId && playing]);
 
@@ -69,7 +97,7 @@ const accent = E(4, 15);
 const ticker3 = reactive({
   /* phase, indexes into both onset and accent rhythms */
   p: 0,
-  intervalId: undefined
+  intervalId: undefined,
 });
 
 const modulate = () => {
@@ -80,15 +108,19 @@ const modulate = () => {
       ticker3.p = (ticker3.p + 1) % onset.length;
     }, 1000 / 7);
   }
-}
+};
 
 const seq3 = computed(() =>
-  onset.map((v, i) =>
-    ticker3.intervalId && v && ticker3.p == i && (accent[i] ? "accent" : "true")
+  onset.map(
+    (v, i) =>
+      ticker3.intervalId &&
+      v &&
+      ticker3.p == i &&
+      (accent[i] ? "accent" : "true")
   )
 );
 
-watch(ticker3, ({intervalId, p}) => {
+watch(ticker3, ({ intervalId, p }) => {
   if (intervalId && onset[p]) {
     if (accent[p]) {
       beep(0.02, 0.01, 0.1);
@@ -102,7 +134,7 @@ const class3 = computed(() => [demo, ticker3.intervalId && playing]);
 
 // Demo 4 --- Everything
 
-const ticker4 = reactive({  state: initialCycleState, intervalId: undefined });
+const ticker4 = reactive({ state: initialCycleState, intervalId: undefined });
 const everything = () => {
   if (ticker4.intervalId) {
     ticker4.intervalId = (clearInterval(ticker4.intervalId), undefined);
@@ -111,7 +143,7 @@ const everything = () => {
       ticker4.state = cycleTick(ticker4.state);
     }, 1000 / 7);
   }
-}
+};
 
 const seq4 = computed(() => {
   const { k, n, p } = ticker4.state;
@@ -120,7 +152,7 @@ const seq4 = computed(() => {
   const seq38 = e38.map((v, i) => intervalId && v && p == i);
   const seqKN = eKN.map((v, i) => intervalId && v && p == i);
   const seq78 = e78.map((v, i) => intervalId && v && p == i);
-  return {a: seq38, b: seqKN, c: seq78};
+  return { a: seq38, b: seqKN, c: seq78 };
 });
 
 watchEffect(() => {

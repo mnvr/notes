@@ -68,6 +68,3 @@ export const beep = (
 
   return osc;
 };
-
-export const toggleBeeps = (id: number | undefined) =>
-  id ? (clearInterval(id), undefined) : setInterval(() => beep(0.01), 1000 / 7);
