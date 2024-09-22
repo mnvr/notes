@@ -6,7 +6,7 @@ interface E38State {
   seqIndex: number;
 }
 
-export const e38Seq = (() => {
+export const e38 = (() => {
   const seq = [1, 0, 0, 1, 0, 0, 1, 0];
   const seq2 = E(3, 8);
   console.assert(JSON.stringify(seq) == JSON.stringify(seq2));

@@ -7,7 +7,7 @@ date: 2024-01-31
 <script setup>
 import { reactive, computed, useCssModule, onMounted } from "vue";
 
-const seqE38 = [1, 0, 0, 1, 0, 0, 1, 0];
+const e38 = [1, 0, 0, 1, 0, 0, 1, 0];
 
 const ticker = reactive({  i: 0, intervalId: undefined });
 const toggleTicker = () => {
@@ -16,11 +16,14 @@ const toggleTicker = () => {
     ticker.intervalId = undefined;
   } else {
     ticker.intervalId = setInterval(() => {
-      ticker.i = (ticker.i + 1) % seqE38.length;
+      ticker.i = (ticker.i + 1) % e38.length;
     }, 1000 / 7);
   }
 }
-const i = computed(() => ticker.i);
+
+const seqE38 = computed(() =>
+  e38.map((v, i) => ticker.intervalId && v && ticker.i == i ? 1 : 0)
+);
 
 const { demo, playing } = useCssModule();
 const classB1 = computed(() => [demo, ticker.intervalId && playing]);
@@ -49,7 +52,7 @@ const classB1 = computed(() => [demo, ticker.intervalId && playing]);
   box-sizing: border-box;
 }
 
-.E38 > div.on {
+.E38 > div[data-on="1"] {
   background-color: tomato;
 }
 
@@ -69,14 +72,9 @@ const classB1 = computed(() => [demo, ticker.intervalId && playing]);
 # Euclid and music
 
 <div :class="$style.E38">
-<div></div>
-<div></div>
-<div :class="$style.on"></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
+<template v-for="s in seqE38">
+<div :data-on="s"></div>
+</template>
 </div>
 
 <button @click="toggleTicker" :class="classB1">Play / Pause</button>
