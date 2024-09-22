@@ -8,11 +8,14 @@ date: 2024-01-31
 import { reactive, computed, watch, watchEffect, useCssModule, onMounted } from "vue";
 import { beep } from "./js/javascript-audio.ts";
 import { E } from "./js/euclid.ts";
-import { e38, initialCycleState, cycleTick } from "./js/euclidean-rhythms.ts";
+import { initialCycleState, cycleTick } from "./js/euclidean-rhythms.ts";
 
 const { demo, playing } = useCssModule();
 
-// Demo 1 ---
+const e38 = E(3, 8);
+const e78 = E(7, 8);
+
+// Demo 1 --- E(3, 8)
 
 const ticker1 = reactive({  i: 0, intervalId: undefined });
 
@@ -34,7 +37,7 @@ watch(ticker1, ({intervalId, i}) => intervalId && e38[i] && beep(0.01))
 
 const class1 = computed(() => [demo, ticker1.intervalId && playing]);
 
-// Demo 2 ---
+// Demo 2 --- Cycle
 
 const ticker2 = reactive({  state: initialCycleState, intervalId: undefined });
 const cycle = () => {
@@ -58,7 +61,7 @@ watchEffect(() =>
 
 const class2 = computed(() => [demo, ticker2.intervalId && playing]);
 
-// Demo 3 ---
+// Demo 3 --- Modulate
 
 const onset = E(9, 15);
 const accent = E(4, 15);
@@ -96,6 +99,43 @@ watch(ticker3, ({intervalId, p}) => {
 });
 
 const class3 = computed(() => [demo, ticker3.intervalId && playing]);
+
+// Demo 4 --- Everything
+
+const ticker4 = reactive({  state: initialCycleState, intervalId: undefined });
+const everything = () => {
+  if (ticker4.intervalId) {
+    ticker4.intervalId = (clearInterval(ticker4.intervalId), undefined);
+  } else {
+    ticker4.intervalId = setInterval(() => {
+      ticker4.state = cycleTick(ticker4.state);
+    }, 1000 / 7);
+  }
+}
+
+const seq4 = computed(() => {
+  const { k, n, p } = ticker4.state;
+  const intervalId = ticker4.intervalId;
+  const eKN = E(k, n);
+  const seq38 = e38.map((v, i) => intervalId && v && p == i);
+  const seqKN = eKN.map((v, i) => intervalId && v && p == i);
+  const seq78 = e78.map((v, i) => intervalId && v && p == i);
+  if (intervalId) {
+    if (seq38[p % 8]) {
+      beep(0.01, 0.001, 0.1, 660);
+    }
+    if (seqKN[p]) {
+      beep(0.01);
+      beep(0.005, 0.001, 0.02, 660);
+    }
+    if (seq78[p % 8]) {
+      beep(0.1, 0.001, 0.1, 110);
+    }
+  }
+  return {a: seq38, b: seqKN, c: seq78};
+});
+
+const class4 = computed(() => [demo, ticker4.intervalId && playing]);
 </script>
 
 <style module>
@@ -163,7 +203,7 @@ button.playing {
 # Euclid and music
 
 <div :class="$style.beats">
-<div v-for="s in seq1" :data-on="s"></div>
+  <div v-for="s in seq1" :data-on="s"></div>
 </div>
 
 <button @click="toggleTicker" :class="class1">Play / Pause</button>
@@ -248,7 +288,7 @@ Here is a player that cycles through various Euclidean rhythms.
 I have listened to this for hours.
 
 <div :class="[$style.beats, $style.cycle]">
-<div v-for="s in seq2" :data-on="s"></div>
+  <div v-for="s in seq2" :data-on="s"></div>
 </div>
 
 <button @click="cycle" :class="class2">Cycle</button>
@@ -262,7 +302,7 @@ pattern.
 Here we use it to accent certain notes by using a different attack and release.
 
 <div :class="[$style.beats, $style.modulate]">
-<div v-for="s in seq3" :data-on="s"></div>
+  <div v-for="s in seq3" :data-on="s"></div>
 </div>
 
 <button @click="modulate" :class="class3">Modulate</button>
@@ -273,7 +313,21 @@ And we can do all these at once. The integral framework provided by Euclidean
 rhythms ensures that the mismash doesn't sound as chaotic as mixing arbitrary
 patterns would've. It might even sound nice to some.
 
-<!-- <D.Everything /> -->
+<div>
+  <div :class="$style.beats">
+    <div v-for="s in seq4.a" :data-on="s"></div>
+  </div>
+  <div :class="$style.beats">
+    <div v-for="s in seq4.b" :data-on="s"></div>
+  </div>
+  <div :class="$style.beats">
+    <div v-for="s in seq4.c" :data-on="s"></div>
+  </div>
+</div>
+
+<button @click="everything" :class="class4">Everthing at once</button>
+
+<hr style="margin-block: 2rem">
 
 <small>
 

@@ -45,10 +45,14 @@ export const toggleFirstTone = (oscNode: OscillatorNode | undefined) => {
   return osc;
 };
 
-export const beep = (duration: number, attack = 0.001, release = 0.1) => {
+export const beep = (
+  duration: number,
+  attack = 0.001,
+  release = 0.1,
+  frequency = 440
+) => {
   const ctx = getAudioContext();
-  // 440 Hz is also the default, just passing it for illustration here.
-  const osc = new OscillatorNode(ctx, { frequency: 440 });
+  const osc = new OscillatorNode(ctx, { frequency });
   const env = new GainNode(ctx);
   const t = ctx.currentTime;
 
