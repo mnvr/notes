@@ -8,7 +8,7 @@ date: 2024-01-31
 import { reactive, computed, watch, watchEffect, useCssModule, onMounted } from "vue";
 import { beep } from "./js/javascript-audio.ts";
 import { E } from "./js/euclid.ts";
-import { e38, initialCycleState, cycleTick,  } from "./js/euclidean-rhythms.ts";
+import { e38, initialCycleState, cycleTick } from "./js/euclidean-rhythms.ts";
 
 const { demo, playing } = useCssModule();
 
@@ -57,6 +57,45 @@ watchEffect(() =>
 )
 
 const class2 = computed(() => [demo, ticker2.intervalId && playing]);
+
+// Demo 3 ---
+
+const onset = E(9, 15);
+const accent = E(4, 15);
+
+const ticker3 = reactive({
+  /* phase, indexes into both onset and accent rhythms */
+  p: 0,
+  intervalId: undefined
+});
+
+const modulate = () => {
+  if (ticker3.intervalId) {
+    ticker3.intervalId = (clearInterval(ticker3.intervalId), undefined);
+  } else {
+    ticker3.intervalId = setInterval(() => {
+      ticker3.p = (ticker3.p + 1) % onset.length;
+    }, 1000 / 7);
+  }
+}
+
+const seq3 = computed(() =>
+  onset.map((v, i) =>
+    ticker3.intervalId && v && ticker3.p == i && (accent[i] ? "accent" : "true")
+  )
+);
+
+watch(ticker3, ({intervalId, p}) => {
+  if (intervalId && onset[p]) {
+    if (accent[p]) {
+      beep(0.02, 0.01, 0.1);
+    } else {
+      beep(0.08, 0.001, 0.1);
+    }
+  }
+});
+
+const class3 = computed(() => [demo, ticker3.intervalId && playing]);
 </script>
 
 <style module>
@@ -74,8 +113,8 @@ button.playing {
 
 .beats {
   height: 100px;
-  margin-block-start: 1em;
-  margin-block-end: 1.5em;
+  margin-block-start: 2rem;
+  margin-block-end: 1.5rem;
 
   display: flex;
   gap: 18px;
@@ -89,10 +128,14 @@ button.playing {
     border: 1px solid tomato;
     box-sizing: border-box;
   }
+}
 
-  & > div[data-on="true"] {
-    background-color: tomato;
-  }
+.beats > div[data-on="true"] {
+  background-color: tomato;
+}
+
+.beats > div[data-on="accent"] {
+  background-color: lawngreen;
 }
 
 .beats.cycle {
@@ -104,11 +147,22 @@ button.playing {
     width: 20px;
   }
 }
+
+.beats.modulate {
+  height: 10px;
+
+  justify-content: space-between;
+
+  & > div {
+    width: 10px;
+    border-radius: 5px;
+  }
+}
 </style>
 
 # Euclid and music
 
-<div :class="$style.beats" style="margin-block-start: 2rem">
+<div :class="$style.beats">
 <div v-for="s in seq1" :data-on="s"></div>
 </div>
 
@@ -193,12 +247,11 @@ Here is a player that cycles through various Euclidean rhythms.
 
 I have listened to this for hours.
 
-<div :class="[$style.beats, $style.cycle]" style="margin-block-start: 2rem">
+<div :class="[$style.beats, $style.cycle]">
 <div v-for="s in seq2" :data-on="s"></div>
 </div>
 
-<button @click="cycle" :class="class2">Play / Pause</button>
-
+<button @click="cycle" :class="class2">Cycle</button>
 
 ### Not just beats
 
@@ -208,7 +261,11 @@ pattern.
 
 Here we use it to accent certain notes by using a different attack and release.
 
-<!-- <D.Modulate /> -->
+<div :class="[$style.beats, $style.modulate]">
+<div v-for="s in seq3" :data-on="s"></div>
+</div>
+
+<button @click="modulate" :class="class3">Modulate</button>
 
 ### Everything at once
 

@@ -83,25 +83,6 @@ export const cycleTick = ({ k, n, p }: CycleState) => {
 //   );
 // };
 
-// const CycleBeats = styled.div`
-//   height: 40px;
-//   margin-block-start: 1em;
-//   margin-block-end: 1.5em;
-
-//   display: flex;
-//   justify-content: space-between;
-
-//   & > div {
-//     width: 20px;
-//     border: 1px solid var(--mrmr-highlight-color);
-//     box-sizing: border-box;
-//   }
-
-//   & > div.on {
-//     background-color: var(--mrmr-highlight-color);
-//   }
-// `;
-
 // export const Modulate: React.FC = () => {
 //   const getAudioContext = useAudioContext();
 
