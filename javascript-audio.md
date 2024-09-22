@@ -6,7 +6,7 @@ date: 2024-01-25
 
 <script setup>
 import { ref, computed, useCssModule, onMounted, onUnmounted } from "vue";
-import { toggleFirstSound, createBeep, suspend } from "./js/javascript-audio.ts";
+import { toggleFirstSound, createBeep, toggleBeeps } from "./js/javascript-audio.ts";
 
 const { demo, playing } = useCssModule()
 
@@ -27,7 +27,7 @@ const classB3 = computed(() => [demo, intervalID.value && playing]);
 
 onUnmounted(() => {
   oscNode1.value && toggleFirstSound(oscNode1.value);
-  intervalID && toggleBeeps(intervalID);
+  intervalID.value && toggleBeeps(intervalID.value);
 })
 </script>
 
@@ -116,32 +116,33 @@ Instead of clicking the button ourselves, let us ask the computer to click it
 for us, 7 times every second.
 
 <small>
+<blockquote>
 
-> Why 7?
->
-> In music, a second is like an eternity. Events in music happen at the time
-> scale of milliseconds, and there are a _thousand_ milliseconds in a second.
->
-> However, something interesting happens at around 20 - 50 milliseconds, give or
-> take. You might recall that movies have 24 frames per second (i.e. 40 ms for
-> each frame). So if we take a still picture, and move it 24 times per second,
-> it starts to look animated to us.
->
-> The same happens with sound! If there is some movement of air more than around
-> 24 times per second, we start perceiving it as sound. Less than that, we hear
-> them as individual musical notes.
->
-> So the number of beeps have to be less than 24 for us to hear them as
-> individual beeps and not as a single sound. In practice, this threshold varies
-> depending on the exact sound being played and a lot of other factors. 7 per
-> second is a conservative value that we'll always hear as events and not as a
-> single sound.
->
-> 7 is also interesting for other reasons (e.g.
-> [musical scales usually max out at 7 notes](/raag) even though there are 12
-> available to us). This might be related to <i>The Magical Number Seven, Plus
-> or Minus Two</i>, but this aside is already too long and I'm now ranting.
+Why 7?
 
+In music, a second is like an eternity. Events in music happen at the time scale
+of milliseconds, and there are a _thousand_ milliseconds in a second.
+
+However, something interesting happens at around 20 - 50 milliseconds, give or
+take. You might recall that movies have 24 frames per second (i.e. 40 ms for
+each frame). So if we take a still picture, and move it 24 times per second, it
+starts to look animated to us.
+
+The same happens with sound! If there is some movement of air more than around
+24 times per second, we start perceiving it as sound. Less than that, we hear
+them as individual musical notes.
+
+So the number of beeps have to be less than 24 for us to hear them as individual
+beeps and not as a single sound. In practice, this threshold varies depending on
+the exact sound being played and a lot of other factors. 7 per second is a
+conservative value that we'll always hear as events and not as a single sound.
+
+7 is also interesting for other reasons (e.g.
+[musical scales usually max out at 7 notes](/raag) even though there are 12
+available to us). This might be related to <i>The Magical Number Seven, Plus or
+Minus Two</i>, but this aside is already too long and I'm now ranting.
+
+</blockquote>
 </small>
 
 ```js
