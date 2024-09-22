@@ -184,7 +184,7 @@ console, and you’ll get an unrestricted root token for free!
 
 ---
 
-<br/>
+<br>
 
 All these anecdotes Manav, what does all this mean?
 

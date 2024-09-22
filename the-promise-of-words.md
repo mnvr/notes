@@ -106,29 +106,22 @@ on?
 </div>
 
 <div :class="$style.poem">
-Every word is a promise
-<br />
-That binds me down
-<br />
-Ever so little
-<br />
-Until I can't move under
-<br />
-The weight of all the tales
-<br />
+
+<!-- prettier-ignore -->
+Every word is a promise<br>
+That binds me down<br>
+Ever so little<br>
+Until I can't move under<br>
+The weight of all the tales<br>
 I've told
-<br />
-<br />
-Every word
-<br />
-A promise
-<br />
-That holds me down
-<br />
-In a cage of my own making
-<br />
+
+<!-- prettier-ignore -->
+Every word<br>
+A promise<br>
+That holds me down<br>
+In a cage of my own making<br>
 Until I can't fly anymore
-<br />
-<br />
+
 Yet I write <span :class="$style.blink">|</span>
+
 </div>
