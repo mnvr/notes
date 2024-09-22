@@ -149,8 +149,7 @@ the same generic “Spotify” approach to music.
 
 > I think it is because the people who're making these apps were never around in
 > the Justin Frankel era of Winamp, and haven't seen how a music player can
-> provide a fast, seamless, endless _yet_ still personal approach to
-> music.<br/><br/>
+> provide a fast, seamless, endless _yet_ still personal approach to music.
 >
 > That era is not coming back because it relied on piracy, but luckily we don't
 > need to anymore - that's the great thing about Apple's music catalog! We can
@@ -234,6 +233,6 @@ symbiotic. Nothing is set in stone, really.
 > I think most large companies and medium-size companies, and even small
 > companies, are starting to look at the web as the ultimate direct-to-customer
 > distribution chain, bypassing all middlemen, going directly from the supplier
-> to the consumer.<br/><br/>
+> to the consumer.
 >
 > &nbsp;&nbsp;&nbsp;&nbsp;<small> ⸻ Steve Jobs, Make Something Wonderful</small>

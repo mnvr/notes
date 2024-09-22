@@ -26,8 +26,8 @@ You know which paper it links to?
 
 [A prettier printer, by Philip Wadler](http://homepages.inf.ed.ac.uk/wadler/papers/prettier/prettier.pdf)!
 
-> Joyce Kilmer and most computer scientists agree: there is no poem as lovely as
-> a tree.
+_"Joyce Kilmer and most computer scientists agree: there is no poem as lovely as
+a tree."_
 
 Haskellers would recognize both the paper, and the author. Of course, this is
 not to take away from the authors of Prettier and the years of work that has

@@ -11,7 +11,7 @@ _The bias fallacy_
 People will tell you we have all sorts of biases. So what!
 
 > Do I contradict myself?<br/> Very well then I contradict myself,<br/> (I am
-> large, I contain multitudes.)<br/><br/>
+> large, I contain multitudes.)
 >
 > &nbsp;&nbsp;&nbsp;&nbsp;<small> ⸻ Walt Whitman, Song of Myself</small>
 
