@@ -6,37 +6,33 @@ date: 2024-01-25
 
 <script setup>
 import { ref, computed, useCssModule, onMounted, onUnmounted } from "vue";
-import {
-  toggleFirstSound,
-  createBeep,
-  toggleBeeps,
-} from "./js/javascript-audio.ts";
+import { toggleFirstTone, beep, toggleBeeps } from "./js/javascript-audio.ts";
 
 const { demo, playing } = useCssModule();
 
-const oscNode1 = ref();
-const firstSound = () => (oscNode1.value = toggleFirstSound(oscNode1.value));
-const classB1 = computed(() => [demo, oscNode1.value && playing]);
+const osc1 = ref();
+const on1 = () => (osc1.value = toggleFirstTone(osc1.value));
+const classB1 = computed(() => [demo, osc1.value && playing]);
 
-const oscNode2 = ref();
-const beep = () => {
-  oscNode2.value = createBeep(0.2);
-  oscNode2.value.onended = () => (oscNode2.value = undefined);
+const osc2 = ref();
+const on2 = () => {
+  osc2.value = beep(0.2);
+  osc2.value.onended = () => (osc2.value = undefined);
 };
-const classB2 = computed(() => [demo, oscNode2.value && playing]);
+const classB2 = computed(() => [demo, osc2.value && playing]);
 
 const intervalId = ref();
-const beeps = () => (intervalId.value = toggleBeeps(intervalId.value));
+const on3 = () => (intervalId.value = toggleBeeps(intervalId.value));
 const classB3 = computed(() => [demo, intervalId.value && playing]);
 
 onUnmounted(() => {
-  oscNode1.value && toggleFirstSound(oscNode1.value);
+  osc1.value && toggleFirstTone(osc1.value);
   intervalId.value && toggleBeeps(intervalId.value);
 });
 </script>
 
 <style module>
-.demo {
+button.demo {
   padding-inline: 12px;
   padding-block: 4px;
   min-width: 5rem;
@@ -44,7 +40,7 @@ onUnmounted(() => {
   border-radius: 3px;
 }
 
-.playing {
+button.playing {
   border-color: tomato;
 }
 </style>
@@ -53,7 +49,7 @@ onUnmounted(() => {
 
 _An elementary introduction to JavaScript audio_
 
-<button @click="firstSound" :class="classB1">Play / Pause</button>
+<button @click="on1" :class="classB1">Play / Pause</button>
 
 ### First sound
 
@@ -115,7 +111,7 @@ const beep = (duration) => {
 };
 ```
 
-<button @click="beep" :class="classB2">Beep</button>
+<button @click="on2" :class="classB2">Beep</button>
 
 ### Beeps
 
@@ -159,7 +155,7 @@ setInterval(() => {
 }, 1000 / 7);
 ```
 
-<button @click="beeps" :class="classB3">Beeps</button>
+<button @click="on3" :class="classB3">Beeps</button>
 
 ### Rest of the owl
 

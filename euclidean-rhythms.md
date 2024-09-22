@@ -22,41 +22,16 @@ const toggleTicker = () => {
 }
 
 const seqE38 = computed(() =>
-  e38.map((v, i) => ticker.intervalId && v && ticker.i == i ? 1 : 0)
+  e38.map((v, i) => ticker.intervalId && v && ticker.i == i)
 );
 
 const { demo, playing } = useCssModule();
-const classB1 = computed(() => [demo, ticker.intervalId && playing]);
+const class1 = computed(() => [demo, ticker.intervalId && playing]);
 
 </script>
 
 <style module>
-.E38 {
-  height: 100px;
-  margin-block-start: 1em;
-  margin-block-end: 1.5em;
-
-  display: flex;
-  gap: 18px;
-}
-
-@media (width < 400px) {
-  .E38 {
-    gap: min((100% - 12 * 10px) / 11, 18px);
-  }
-}
-
-.E38 > div {
-  width: 10px;
-  border: 1px solid tomato;
-  box-sizing: border-box;
-}
-
-.E38 > div[data-on="1"] {
-  background-color: tomato;
-}
-
-.demo {
+button.demo {
   padding-inline: 12px;
   padding-block: 4px;
   min-width: 5rem;
@@ -64,20 +39,43 @@ const classB1 = computed(() => [demo, ticker.intervalId && playing]);
   border-radius: 3px;
 }
 
-.playing {
+button.playing {
   border-color: tomato;
+}
+
+.beats {
+  height: 100px;
+  margin-block-start: 1em;
+  margin-block-end: 1.5em;
+
+  display: flex;
+  gap: 18px;
+
+  @media (width < 400px) {
+    gap: min((100% - 12 * 10px) / 11, 18px);
+  }
+
+  & > div {
+    width: 10px;
+    border: 1px solid tomato;
+    box-sizing: border-box;
+  }
+
+  & > div[data-on="true"] {
+    background-color: tomato;
+  }
 }
 </style>
 
 # Euclid and music
 
-<div :class="$style.E38">
+<div :class="$style.beats">
 <template v-for="s in seqE38">
 <div :data-on="s"></div>
 </template>
 </div>
 
-<button @click="toggleTicker" :class="classB1">Play / Pause</button>
+<button @click="toggleTicker" :class="class1">Play / Pause</button>
 
 ### Euclid's algorithm
 

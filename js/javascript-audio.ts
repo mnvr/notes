@@ -35,21 +35,17 @@ export const getAudioContext = () => {
 
 export const suspend = () => ac?.suspend();
 
-export const toggleFirstSound = (oscNode: OscillatorNode | undefined) => {
-  if (oscNode) {
-    oscNode.stop();
-    return undefined;
-  } else {
-    const ctx = getAudioContext();
-    const osc = new OscillatorNode(ctx);
-    const mix = new GainNode(ctx, { gain: 0.1 });
-    osc.connect(mix).connect(ctx.destination);
-    osc.start();
-    return osc;
-  }
+export const toggleFirstTone = (oscNode: OscillatorNode | undefined) => {
+  if (oscNode) return oscNode.stop(), undefined;
+  const ctx = getAudioContext();
+  const osc = new OscillatorNode(ctx);
+  const mix = new GainNode(ctx, { gain: 0.1 });
+  osc.connect(mix).connect(ctx.destination);
+  osc.start();
+  return osc;
 };
 
-export const createBeep = (duration: number, attack = 0.001, release = 0.1) => {
+export const beep = (duration: number, attack = 0.001, release = 0.1) => {
   const ctx = getAudioContext();
   // 440 Hz is also the default, just passing it for illustration here.
   const osc = new OscillatorNode(ctx, { frequency: 440 });
@@ -69,11 +65,5 @@ export const createBeep = (duration: number, attack = 0.001, release = 0.1) => {
   return osc;
 };
 
-export const toggleBeeps = (intervalID: number | undefined) => {
-  if (intervalID) {
-    clearInterval(intervalID);
-    return undefined;
-  } else {
-    return setInterval(() => createBeep(0.01), 1000 / 7);
-  }
-};
+export const toggleBeeps = (id: number | undefined) =>
+  id ? (clearInterval(id), undefined) : setInterval(() => beep(0.01), 1000 / 7);
