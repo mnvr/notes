@@ -190,10 +190,9 @@ of music. For that, we'll need to use the "advanced" AudioWorklets instead which
 run unthrottled in the background.
 
 That's for a future post. But keep in mind that if you're not looking for
-background music, the standard APIs might be enough.
-[Here is a small synth](https://github.com/mnvr/mrmr.io/blob/main/pages/raag/synth.ts)
-with a lot of source code comments explaining the aspects we covered here in
-more depth.
+background music, the standard APIs might be enough. [Here is a small
+synth](https://github.com/mnvr/mrmr.io/blob/main/raag/synth.ts) with a lot of
+source code comments explaining the aspects we covered here in more depth.
 
 <small>
 
