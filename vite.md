@@ -17,3 +17,7 @@ npx vite
 
 in any folder, and get a hot reloading http server that serves the HTML in that
 directory.
+
+## This and that
+
+- Use `DEBUG=vite:* vite` to get Vite to talk more.
