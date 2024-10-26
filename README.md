@@ -1,9 +1,1 @@
-Notes by Manav.
-
-### Running locally
-
-Install node and run `npm install` once. Then,
-
-```sh
-npm run dev
-```
+Moved back into [mnvr/mrmr.io](https://github.com/mnvr/mrmr.io)
